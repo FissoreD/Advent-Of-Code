@@ -1,0 +1,9 @@
+; (executable
+;  (public_name Advent_Of_Code)
+;  (name main)
+;  (libraries y2015))
+
+(executables
+ (public_names Advent_Of_Code make)
+ (names main create_file)
+ (libraries Unix y2015))
