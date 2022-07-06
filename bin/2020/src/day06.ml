@@ -5,7 +5,7 @@ let inp () = read_file "day06" (fun a -> a) |> remove_empty_line
 
 let calc =
   List.map (fun elt ->
-      Str.global_replace (Str.regexp " ") "" elt
+      Re.Str.global_replace (Re.Str.regexp " ") "" elt
       |> string_2_char_list |> SET06.of_list)
 
 let day06_1 () =

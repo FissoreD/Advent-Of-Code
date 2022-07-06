@@ -56,13 +56,13 @@ let add_start_end s = "^" ^ s ^ "$"
 
 let day19_1 () =
   let a, b = inp () in
-  let regex = Str.regexp (create_regex 0 a |> add_start_end) in
-  List.map (fun e -> Str.string_match regex e 0 |> bool_to_int) b
+  let regex = Re.Str.regexp (create_regex 0 a |> add_start_end) in
+  List.map (fun e -> Re.Str.string_match regex e 0 |> bool_to_int) b
   |> List.fold_left ( + ) 0
 
-(* 
-  8: 42 | 42 8
-  11: 42 31 | 42 11 31 
+(*
+   8: 42 | 42 8
+   11: 42 31 | 42 11 31
 *)
 let matchNtimes a b =
   let rec aux acc times =
@@ -77,9 +77,9 @@ let day19_2 () =
   let _31 = create_regex 31 a in
   let all_rules =
     matchNtimes _42 _31
-    |> map (fun elt -> Str.regexp ("^\\(" ^ _42 ^ "+\\)\\(" ^ elt ^ "\\)$"))
+    |> map (fun elt -> Re.Str.regexp ("^\\(" ^ _42 ^ "+\\)\\(" ^ elt ^ "\\)$"))
   in
-  map (fun s -> exists (fun exp -> Str.string_match exp s 0) all_rules) b
+  map (fun s -> exists (fun exp -> Re.Str.string_match exp s 0) all_rules) b
   |> count true
 
 let _ = day19_2 () |> print_int

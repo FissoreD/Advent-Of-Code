@@ -4,7 +4,8 @@ module Set07 = Set.Make (String)
 let rec read_queue = function
   | nb :: col :: col2 :: tl when is_int nb ->
       (col ^ " " ^ col2, int_of_string nb) :: read_queue tl
-  | hd :: tl when Str.string_match (Str.regexp "bag.*") hd 0 -> read_queue tl
+  | hd :: tl when Re.Str.string_match (Re.Str.regexp "bag.*") hd 0 ->
+      read_queue tl
   | _ -> []
 
 let parse_line l =

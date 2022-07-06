@@ -1,10 +1,6 @@
 let cnt = Lib.read_file "15" "07" (String.split_on_char ' ')
 
-module MyMap = Map.Make (struct
-  type t = string
-
-  let compare = compare
-end)
+module MyMap = Map.Make (String)
 
 module P1 = struct
   let parse_symbol map a =
