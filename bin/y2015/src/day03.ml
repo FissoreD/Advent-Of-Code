@@ -32,7 +32,7 @@ end
 module Part2Module = struct
   let move_alternate cnt =
     let l1 = List.filteri (fun a _ -> a mod 2 = 0) cnt in
-    let l2 = List.filteri (fun a _ -> a mod 2 != 0) cnt in
+    let l2 = List.filteri (fun a _ -> a mod 2 <> 0) cnt in
     let set1, set2 = (Part1Module.makeMove l1, Part1Module.makeMove l2) in
     MySet.(union set1 set2 |> cardinal)
 end

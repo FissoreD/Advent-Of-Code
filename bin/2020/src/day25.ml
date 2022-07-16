@@ -1,12 +1,11 @@
 open Lib
 
 let subject_number = 7
-
 let inp () = read_file "day25" int_of_string
 
 let handshake x =
   let rec aux acc = function
-    | e when e = x && acc != 0 -> acc
+    | e when e = x && acc <> 0 -> acc
     | e -> aux (acc + 1) (e * subject_number mod 20201227)
   in
   aux 0 1
