@@ -1,3 +1,5 @@
+(* https://adventofcode.com/2015/day/4 *)
+
 let cnt =
   match Lib.read_file "15" "04" Lib.id with
   | [ a ] -> a

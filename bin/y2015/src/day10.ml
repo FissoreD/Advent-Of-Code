@@ -1,3 +1,5 @@
+(* https://adventofcode.com/2015/day/10 *)
+
 let cnt =
   Lib.read_file "15" "10" Lib.id
   |> List.hd |> Lib.string_2_char_list

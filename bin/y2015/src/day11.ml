@@ -1,3 +1,5 @@
+(* https://adventofcode.com/2015/day/11 *)
+
 let cnt = Lib.read_file "15" "11" Lib.string_2_char_list |> List.hd
 
 module P1 = struct

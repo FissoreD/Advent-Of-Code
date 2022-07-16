@@ -1,3 +1,5 @@
+(* https://adventofcode.com/2015/day/7 *)
+
 let cnt = Lib.read_file "15" "07" (String.split_on_char ' ')
 
 module MyMap = Map.Make (String)

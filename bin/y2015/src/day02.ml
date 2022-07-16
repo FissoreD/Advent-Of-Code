@@ -1,3 +1,5 @@
+(* https://adventofcode.com/2015/day/2 *)
+
 let cnt =
   Lib.read_file "15" "02" Lib.id
   |> List.map (String.split_on_char 'x')

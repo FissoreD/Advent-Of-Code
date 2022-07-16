@@ -1,3 +1,5 @@
+(* https://adventofcode.com/2015/day/6 *)
+
 let str_to_int_couple s =
   let l = String.split_on_char ',' s in
   match l with
