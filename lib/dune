@@ -1,4 +1,5 @@
 (include_subdirs unqualified)
 
 (library
- (name lib))
+ (name lib)
+ (libraries re))

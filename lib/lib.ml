@@ -121,3 +121,5 @@ let id i = i
 
 let print_bool x =
   (match x with true -> "true" | false -> "false") |> print_string
+
+let remove_comma = Re.Str.global_replace (Re.Str.regexp ",") ""
