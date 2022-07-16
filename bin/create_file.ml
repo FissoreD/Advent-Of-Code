@@ -15,7 +15,8 @@ let () =
   if file_exists src |> not then (
     let out_src = open_out src in
     Printf.fprintf out_src
-      "let cnt = Lib.read_file \"%s\" \"%s\" (String.split_on_char ' ')\n" year
-      day;
+      "(* https://adventofcode.com/%s/day/%s *)\n\n\
+       let cnt = Lib.read_file \"%s\" \"%s\" (String.split_on_char ' ')\n"
+      year day year day;
     Printf.fprintf out_src "let part1() = ()\n let part2() = ()";
     close_out out_src)
