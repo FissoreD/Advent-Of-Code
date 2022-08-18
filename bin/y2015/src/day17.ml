@@ -1,4 +1,4 @@
-(* https://adventofcode.com/15/day/17 *)
+(* https://adventofcode.com/2015/day/17 *)
 
 let cnt = Lib.read_file "15" "17" int_of_string |> List.sort compare
 

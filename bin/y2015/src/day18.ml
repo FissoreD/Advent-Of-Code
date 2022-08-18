@@ -1,4 +1,4 @@
-(* https://adventofcode.com/15/day/18 *)
+(* https://adventofcode.com/2015/day/18 *)
 
 let cnt =
   let l = Lib.read_file "15" "18" Lib.string_2_char_list in
