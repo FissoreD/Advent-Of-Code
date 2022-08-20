@@ -2,10 +2,14 @@
 open Lib
 open Lib.List
 
-type dico = { hit : int; damage : int; armor : int }
+type character = { hit : int; damage : int; armor : int }
 
 (* Note: hit attribute in dico list represents the cost *)
-type store = { weapon : dico list; armor : dico list; ring : dico list }
+type store = {
+  weapon : character list;
+  armor : character list;
+  ring : character list;
+}
 
 (* Hit points, Damge, Armor *)
 let monster =
@@ -49,7 +53,8 @@ let store =
 let empty = { hit = 0; damage = 0; armor = 0 }
 
 module P1 = struct
-  let make_turn ((hero : dico), (monster : dico)) is_player : dico * dico =
+  let make_turn ((hero : character), (monster : character)) is_player :
+      character * character =
     if is_player then
       ( hero,
         {
