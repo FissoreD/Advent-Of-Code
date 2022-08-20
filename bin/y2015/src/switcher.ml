@@ -26,4 +26,5 @@ let switch pb = function
   | "20" -> Day20.(if is1 pb then part1 else part2) ()
   | "21" -> Day21.(if is1 pb then part1 else part2) ()
   | "22" -> Day22.(if is1 pb then part1 else part2) ()
+  | "23" -> Day23.(if is1 pb then part1 else part2) ()
   | _ -> raise Lib.Switch_not_implemented
