@@ -98,7 +98,6 @@ module P1 = struct
     let minim = ref max_int in
     let rec aux (hero, monster, spells) is_player history =
       let hero = if is_player then hero_penality hero else hero in
-      (* let (hero, monster, spells) = make_turn (hero, monster, spells) None is_player |> fst in *)
       if hero.hit <= 0 || hero.spent_mana >= !minim then max_int
       else
         let available_spells =
