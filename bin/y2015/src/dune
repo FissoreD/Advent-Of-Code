@@ -27,5 +27,6 @@
   day22
   day23
   day24
+  day25
   switcher)
  (libraries lib re yojson))

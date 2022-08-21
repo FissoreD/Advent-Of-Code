@@ -10,7 +10,6 @@ type character = {
   spent_mana : int;
 }
 
-(* let hero = { hit = 10; mana = 250; spent_mana = 0; damage = 0; armor = 0 } *)
 let hero = { hit = 50; mana = 500; spent_mana = 0; damage = 0; armor = 0 }
 
 let monster =

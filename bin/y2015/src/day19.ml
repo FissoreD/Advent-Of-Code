@@ -33,10 +33,7 @@ module P1 = struct
         if List.length l < List.length key then pred @ l
         else
           let same, suff = same_prefix (key, l) in
-          if same then
-            (* print_endline *)
-            (* (Lib.char_list_2_string value ^ " " ^ Lib.char_list_2_string key); *)
-            pred @ value @ suff
+          if same then pred @ value @ suff
           else replaceOne (pred @ [ hd ]) (key, value) tl
 
   let replace (s : char list) ((a, b) : char list * char list) =
@@ -64,7 +61,6 @@ module P2 = struct
     in
     let rec aux assoc1 acc values =
       let next = P1.replaceOne [] (List.hd assoc1) values in
-      (* if next <> values then *)
       print_endline (string_of_int acc ^ " " ^ Lib.char_list_2_string values);
       if [ 'e' ] = next then acc
       else if List.length next = 0 then invalid_arg "Error ?"
@@ -78,8 +74,4 @@ module P2 = struct
 end
 
 let part1 () = P1.main cnt |> print_int
-
-let part2 () =
-  (* P1.replaceOne [] ([ 'H'; 'T'; 'H' ], [ 'F' ]) [ 'H'; 'O'; 'H'; 'H'; 'O' ]
-     |> Lib.char_list_2_string |> print_endline *)
-  P2.main cnt |> print_int
+let part2 () = P2.main cnt |> print_int

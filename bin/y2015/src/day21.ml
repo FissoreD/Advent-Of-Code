@@ -11,7 +11,6 @@ type store = {
   ring : character list;
 }
 
-(* Hit points, Damge, Armor *)
 let monster =
   let inp =
     read_file "15" "21" (fun e ->

@@ -81,8 +81,6 @@ let string_2_char_list s =
   aux [] (String.length s - 1)
 
 let bool_to_int n = if n then 1 else 0
-
-(** is int *)
 let char_of_string = String.make 1
 
 let rec char_list_2_string = function

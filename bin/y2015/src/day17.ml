@@ -35,6 +35,3 @@ end
 
 let part1 () = P1.main cnt |> print_int
 let part2 () = P2.main cnt |> print_int
-(* |> List.iter (fun e ->
-       print_int e;
-       prerr_newline ()) *)
