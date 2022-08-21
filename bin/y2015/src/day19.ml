@@ -54,24 +54,18 @@ module P1 = struct
 end
 
 module P2 = struct
-  let main ((s : char list), (assoc : (char list * char list) list)) =
-    let assoc =
-      List.map (fun (a, b) -> (b, a)) assoc
-      |> List.sort (fun (a, _) (b, _) -> List.length b - List.length a)
-    in
-    let rec aux assoc1 acc values =
-      let next = P1.replaceOne [] (List.hd assoc1) values in
-      print_endline (string_of_int acc ^ " " ^ Lib.char_list_2_string values);
-      if [ 'e' ] = next then acc
-      else if List.length next = 0 then invalid_arg "Error ?"
-      else
-        aux
-          (if next = values then List.tl assoc1 else assoc)
-          (acc + if next = values then 0 else 1)
-          next
-    in
-    aux assoc 1 s
+  let count_maj str =
+    Lib.string_2_char_list "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    |> List.map Lib.char_of_string
+    |> List.map (Lib.count_substring str)
+    |> List.fold_left ( + ) 0
+
+  let count_Rn_Ar str =
+    List.map (Lib.count_substring str) [ "Rn"; "Ar" ] |> List.fold_left ( + ) 0
+
+  let count_Y str = Lib.count_substring str "Y"
+  let main str = count_maj str - count_Rn_Ar str - (2 * count_Y str) - 1
 end
 
 let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main cnt |> print_int
+let part2 () = P2.main (cnt |> fst |> Lib.char_list_2_string) |> print_int

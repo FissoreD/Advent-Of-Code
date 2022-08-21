@@ -65,6 +65,8 @@ module List = struct
     | [] -> raise Invalid_input
     | hd :: _ when hd = elt -> 0
     | _ :: tl -> 1 + index_of elt tl
+
+  let remove_last l = List.rev (List.tl (List.rev l))
 end
 
 let is_int s =
@@ -86,6 +88,20 @@ let char_of_string = String.make 1
 let rec char_list_2_string = function
   | [] -> ""
   | hd :: tl -> char_of_string hd ^ char_list_2_string tl
+
+let count_substring str sub =
+  let sub_len = String.length sub in
+  let len_diff = String.length str - sub_len
+  and reg = Re.Str.regexp_string sub in
+  let rec aux i n =
+    if i > len_diff then n
+    else
+      try
+        let pos = Re.Str.search_forward reg str i in
+        aux (pos + sub_len) (succ n)
+      with Not_found -> n
+  in
+  aux 0 0
 
 (*let in_bouond_inclusive (a, b) elt = elt >= a && elt <= b
   let xor a b = (a && not b) || (b && not a)

@@ -1,0 +1,6 @@
+(include_subdirs unqualified)
+
+(library
+ (name y2016)
+ (modules day01 switcher)
+ (libraries lib re yojson))
