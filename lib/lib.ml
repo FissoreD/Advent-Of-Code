@@ -103,34 +103,35 @@ let count_substring str sub =
   in
   aux 0 0
 
-(*let in_bouond_inclusive (a, b) elt = elt >= a && elt <= b
-  let xor a b = (a && not b) || (b && not a)
-  let ( ++ ) (a, b) (c, d) = (a + c, b + d)
-  let ( ** ) (a, b) (c, d) = (a * c, b * d)
-  let ( +++ ) (a, b, c) (a', b', c') = (a + a', b + b', c + c')
-  let ( ++++ ) (a, b, c, d) (a', b', c', d') = (a + a', b + b', c + c', d + d')
+let in_bouond_inclusive (a, b) elt = elt >= a && elt <= b
 
-  let remove_empty_line l =
-    let rec aux acc = function
-      | [] -> [ acc ]
-      | "" :: tl -> acc :: aux "" tl
-      | hd :: tl -> aux (acc ^ (if acc = "" then acc else " ") ^ hd) tl
-    in
-    aux "" l
+(* let xor a b = (a && not b) || (b && not a)
+   let ( ++ ) (a, b) (c, d) = (a + c, b + d)
+   let ( ** ) (a, b) (c, d) = (a * c, b * d)
+   let ( +++ ) (a, b, c) (a', b', c') = (a + a', b + b', c + c')
+   let ( ++++ ) (a, b, c, d) (a', b', c', d') = (a + a', b + b', c + c', d + d')
 
-  let ang_in_360 a = a - (a / 360 * 360)
-  let ang_compl a = 360 - ang_in_360 a
+   let remove_empty_line l =
+     let rec aux acc = function
+       | [] -> [ acc ]
+       | "" :: tl -> acc :: aux "" tl
+       | hd :: tl -> aux (acc ^ (if acc = "" then acc else " ") ^ hd) tl
+     in
+     aux "" l
 
-  let int_to_bin = function
-    | 0 -> "0"
-    | n ->
-        let rec aux = function
-          | 0 -> ""
-          | n -> aux (n / 2) ^ (n mod 2 |> string_of_int)
-        in
-        aux n
+   let ang_in_360 a = a - (a / 360 * 360)
+   let ang_compl a = 360 - ang_in_360 a
 
-  let bin_to_int s = "0b" ^ s |> int_of_string*)
+   let int_to_bin = function
+     | 0 -> "0"
+     | n ->
+         let rec aux = function
+           | 0 -> ""
+           | n -> aux (n / 2) ^ (n mod 2 |> string_of_int)
+         in
+         aux n
+
+   let bin_to_int s = "0b" ^ s |> int_of_string*)
 let id i = i
 
 let print_bool x =
