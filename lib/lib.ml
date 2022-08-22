@@ -111,6 +111,9 @@ let count_substring str sub =
 
 let in_bouond_inclusive (a, b) elt = elt >= a && elt <= b
 
+let rec repeat_string n s =
+  match n with 0 -> "" | n -> s ^ repeat_string (n - 1) s
+
 let string_start_padding str_len pad_char str =
   String.make (max 0 (str_len - String.length str)) pad_char ^ str
 
