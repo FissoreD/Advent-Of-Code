@@ -5,8 +5,8 @@ let file_exists filename =
   with Unix.Unix_error _ -> false
 
 let () =
-  let year = Sys.argv.(1) in
-  let day = Sys.argv.(2) in
+  let year = Sys.argv.(1) |> Lib.string_start_padding 2 '0' in
+  let day = Sys.argv.(2) |> Lib.string_start_padding 2 '0' in
   let input = "bin/y20" ^ year ^ "/input/day" ^ day ^ ".txt" in
   let src = "bin/y20" ^ year ^ "/src/day" ^ day ^ ".ml" in
   (if file_exists input |> not then

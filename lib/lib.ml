@@ -105,6 +105,9 @@ let count_substring str sub =
 
 let in_bouond_inclusive (a, b) elt = elt >= a && elt <= b
 
+let string_start_padding str_len pad_char str =
+  String.make (max 0 (str_len - String.length str)) pad_char ^ str
+
 (* let xor a b = (a && not b) || (b && not a)
    let ( ++ ) (a, b) (c, d) = (a + c, b + d)
    let ( ** ) (a, b) (c, d) = (a * c, b * d)
