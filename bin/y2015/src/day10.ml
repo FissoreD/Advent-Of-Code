@@ -3,7 +3,7 @@
 let cnt =
   Lib.read_file "15" "10" Lib.id
   |> List.hd |> Lib.string_2_char_list
-  |> List.map Lib.char_of_string
+  |> List.map Lib.string_of_char
   |> List.map int_of_string
 
 module P1 = struct

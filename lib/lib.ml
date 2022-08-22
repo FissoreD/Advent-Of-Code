@@ -83,11 +83,17 @@ let string_2_char_list s =
   aux [] (String.length s - 1)
 
 let bool_to_int n = if n then 1 else 0
-let char_of_string = String.make 1
+let string_of_char = String.make 1
+
+let char_to_letter_pos ?(first_letter = 'a') c =
+  Char.code c - Char.code first_letter
+
+let letter_pos_to_char ?(first_letter = 'a') c =
+  Char.chr (c + Char.code first_letter)
 
 let rec char_list_2_string = function
   | [] -> ""
-  | hd :: tl -> char_of_string hd ^ char_list_2_string tl
+  | hd :: tl -> string_of_char hd ^ char_list_2_string tl
 
 let count_substring str sub =
   let sub_len = String.length sub in

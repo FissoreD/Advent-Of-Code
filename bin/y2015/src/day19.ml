@@ -56,7 +56,7 @@ end
 module P2 = struct
   let count_maj str =
     Lib.string_2_char_list "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    |> List.map Lib.char_of_string
+    |> List.map Lib.string_of_char
     |> List.map (Lib.count_substring str)
     |> List.fold_left ( + ) 0
 
