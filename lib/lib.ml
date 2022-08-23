@@ -67,6 +67,39 @@ module List = struct
     | _ :: tl -> 1 + index_of elt tl
 
   let remove_last l = List.rev (List.tl (List.rev l))
+
+  let rec findi pos f = function
+    | [] -> raise Not_found
+    | hd :: _ when f hd -> pos
+    | _ :: tl -> findi pos f tl
+
+  let findi f = findi 0 f
+end
+
+module Array = struct
+  include Array
+
+  let findi f arr =
+    let res = ref (-1) in
+    (try
+       for i = 0 to Array.length arr - 1 do
+         if f arr.(i) then (
+           res := i;
+           raise Exit)
+       done
+     with Exit -> ());
+    if !res = -1 then raise Not_found else !res
+
+  let findi_all f arr =
+    let res = ref [] in
+    (try
+       for i = 0 to Array.length arr - 1 do
+         if f arr.(i) then (
+           res := i :: !res;
+           raise Exit)
+       done
+     with Exit -> ());
+    !res
 end
 
 let is_int s =
