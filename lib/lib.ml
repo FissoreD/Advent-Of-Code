@@ -23,10 +23,10 @@ exception Switch_not_implemented
 module List = struct
   include List
 
-  let rec pop elt = function
+  let rec remove elt : 'a t -> 'a t = function
     | [] -> []
-    | hd :: tl when hd = elt -> pop elt tl
-    | _ :: tl -> pop elt tl
+    | hd :: tl when hd = elt -> remove elt tl
+    | hd :: tl -> hd :: remove elt tl
 
   let rec count elt = function
     | [] -> 0
@@ -142,7 +142,7 @@ let count_substring str sub =
   in
   aux 0 0
 
-let in_bouond_inclusive (a, b) elt = elt >= a && elt <= b
+let in_bouond_inclusive (a, b) elt = a <= elt && elt <= b
 
 let rec repeat_string n s =
   match n with 0 -> "" | n -> s ^ repeat_string (n - 1) s
