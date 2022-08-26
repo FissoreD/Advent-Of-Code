@@ -8,7 +8,7 @@ let cnt =
 let find_brute_force s len =
   let prefix = String.init len (fun _ -> '0') in
   let rec aux n =
-    let dig = s ^ (n |> string_of_int) |> Digest.string |> Digest.to_hex in
+    let dig = s ^ (n |> string_of_int) |> Lib.md5_to_hex in
     if String.starts_with ~prefix dig then n else aux (n + 1)
   in
   aux 0

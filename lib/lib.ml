@@ -56,7 +56,7 @@ module List = struct
       (fun i -> init (length mat) (fun j -> get j mat |> get i))
 
   let rec sub start len = function
-    | _ when len = 0 -> []
+    | _ when len <= 0 -> []
     | [] -> []
     | _ :: tl when start > 0 -> sub (start - 1) len tl
     | hd :: tl -> hd :: sub start (len - 1) tl
@@ -66,7 +66,7 @@ module List = struct
     | hd :: _ when hd = elt -> 0
     | _ :: tl -> 1 + index_of elt tl
 
-  let remove_last l = List.rev (List.tl (List.rev l))
+  let remove_last l = sub 0 (List.length l - 1) l
 
   let rec findi pos f = function
     | [] -> raise Not_found
@@ -74,6 +74,7 @@ module List = struct
     | _ :: tl -> findi pos f tl
 
   let findi f = findi 0 f
+  let last l = get (length l - 1) l
 end
 
 module Array = struct
@@ -172,3 +173,4 @@ let int_to_bin = function
 let id i = i
 let print_bool x = Printf.printf "%b" x
 let remove_comma = Re.Str.global_replace (Re.Str.regexp ",") ""
+let md5_to_hex s = Digest.string s |> Digest.to_hex
