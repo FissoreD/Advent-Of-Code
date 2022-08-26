@@ -152,13 +152,6 @@ let string_start_padding str_len pad_char str =
   String.make (max 0 (str_len - String.length str)) pad_char ^ str
 
 let xor a b = (a && not b) || (b && not a)
-let ( ++ ) (a, b) (c, d) = (a + c, b + d)
-let ( ** ) (a, b) (c, d) = (a * c, b * d)
-let ( +++ ) (a, b, c) (a', b', c') = (a + a', b + b', c + c')
-let ( ++++ ) (a, b, c, d) (a', b', c', d') = (a + a', b + b', c + c', d + d')
-
-(* let ang_in_360 a = a - (a / 360 * 360)
-   let ang_compl a = 360 - ang_in_360 a*)
 let bin_to_int s = "0b" ^ s |> int_of_string
 
 let int_to_bin = function
@@ -169,6 +162,11 @@ let int_to_bin = function
         | n -> aux (n / 2) ^ (n mod 2 |> string_of_int)
       in
       aux n
+
+let rec gcd u v = if v <> 0 then gcd v (u mod v) else abs u
+
+let lcm m n =
+  match (m, n) with 0, _ | _, 0 -> 0 | m, n -> abs (m * n) / gcd m n
 
 let id i = i
 let print_bool x = Printf.printf "%b" x
