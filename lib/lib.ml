@@ -28,10 +28,13 @@ module List = struct
     | hd :: tl when hd = elt -> remove elt tl
     | hd :: tl -> hd :: remove elt tl
 
-  let rec count elt = function
-    | [] -> 0
-    | hd :: tl when elt = hd -> 1 + count elt tl
-    | _ :: tl -> count elt tl
+  let count elt =
+    let rec count acc = function
+      | [] -> acc
+      | hd :: tl when elt = hd -> count (acc + 1) tl
+      | _ :: tl -> count acc tl
+    in
+    count 0
 
   let get a b = List.nth b a
 
@@ -55,11 +58,14 @@ module List = struct
       (hd mat |> length)
       (fun i -> init (length mat) (fun j -> get j mat |> get i))
 
-  let rec sub start len = function
-    | _ when len <= 0 -> []
-    | [] -> []
-    | _ :: tl when start > 0 -> sub (start - 1) len tl
-    | hd :: tl -> hd :: sub start (len - 1) tl
+  let sub start len =
+    let rec aux res start len = function
+      | _ when len <= 0 -> res |> rev
+      | [] -> res
+      | _ :: tl when start > 0 -> aux res (start - 1) len tl
+      | hd :: tl -> aux (hd :: res) start (len - 1) tl
+    in
+    aux [] start len
 
   let rec index_of elt = function
     | [] -> raise Invalid_input
@@ -75,6 +81,14 @@ module List = struct
 
   let findi f = findi 0 f
   let last l = get (length l - 1) l
+
+  let append a b =
+    let rec aux res = function [] -> res | hd :: tl -> aux (hd :: res) tl in
+    aux b (List.rev a)
+
+  let map f l =
+    let rec aux acc = function [] -> acc | hd :: tl -> aux (f hd :: acc) tl in
+    aux [] (List.rev l)
 end
 
 module Array = struct
@@ -103,6 +117,11 @@ module Array = struct
     !res
 end
 
+let is_odd n = n land 1 = 1
+let is_even n = not (is_odd n)
+let halve n = Int.shift_right n 1
+let double n = Int.shift_left n 1
+
 let is_int s =
   try
     int_of_string s |> ignore;
@@ -125,9 +144,16 @@ let char_to_letter_pos ?(first_letter = 'a') c =
 let letter_pos_to_char ?(first_letter = 'a') c =
   Char.chr (c + Char.code first_letter)
 
-let rec char_list_2_string = function
-  | [] -> ""
-  | hd :: tl -> string_of_char hd ^ char_list_2_string tl
+let char_list_2_string l =
+  let buf = Buffer.create (List.length l) in
+  let rec aux = function
+    | [] -> ()
+    | hd :: tl ->
+        Buffer.add_char buf hd;
+        aux tl
+  in
+  aux l;
+  Buffer.contents buf
 
 let count_substring str sub =
   let sub_len = String.length sub in
@@ -145,8 +171,9 @@ let count_substring str sub =
 
 let in_bouond_inclusive (a, b) elt = a <= elt && elt <= b
 
-let rec repeat_string n s =
-  match n with 0 -> "" | n -> s ^ repeat_string (n - 1) s
+let repeat_string n s =
+  let rec aux acc = function 0 -> acc | n -> aux (acc ^ s) (n - 1) in
+  aux "" n
 
 let string_start_padding str_len pad_char str =
   String.make (max 0 (str_len - String.length str)) pad_char ^ str
@@ -159,7 +186,7 @@ let int_to_bin = function
   | n ->
       let rec aux = function
         | 0 -> ""
-        | n -> aux (n / 2) ^ (n mod 2 |> string_of_int)
+        | n -> aux (halve n) ^ if is_even n then "0" else "1"
       in
       aux n
 
@@ -172,3 +199,15 @@ let id i = i
 let print_bool x = Printf.printf "%b" x
 let remove_comma = Re.Str.global_replace (Re.Str.regexp ",") ""
 let md5_to_hex s = Digest.string s |> Digest.to_hex
+
+let rec is_power_of_two n =
+  if n < 1 then invalid_arg "Integer must be positive"
+  else if n = 1 then true
+  else if is_even n then is_power_of_two @@ halve n
+  else false
+
+let timeit f =
+  let t = Sys.time () in
+  let res = f () in
+  print_endline @@ Printf.sprintf "\nTime is : %f\n" (Sys.time () -. t);
+  res
