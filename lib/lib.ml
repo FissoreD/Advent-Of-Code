@@ -206,6 +206,15 @@ let rec is_power_of_two n =
   else if is_even n then is_power_of_two @@ halve n
   else false
 
+(** returns p in N such that pow(2, p) <= n and p is max integer satisfying this constraint *)
+let two_power_floor =
+  let rec aux acc = function
+    | x when x < 1 -> invalid_arg "Should be greater than 0"
+    | 1 -> acc
+    | n -> aux (acc + 1) (halve n)
+  in
+  aux 0
+
 let timeit f =
   let t = Sys.time () in
   let res = f () in
