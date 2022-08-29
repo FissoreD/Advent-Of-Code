@@ -211,3 +211,8 @@ let timeit f =
   let res = f () in
   print_endline @@ Printf.sprintf "\nTime is : %f\n" (Sys.time () -. t);
   res
+
+let open_submodule f1 f2 = function
+  | 1 -> f1
+  | 2 -> f2
+  | _ -> invalid_arg "3rd param should be 1 or 2"
