@@ -115,6 +115,11 @@ module Array = struct
        done
      with Exit -> ());
     !res
+
+  let to_matrix width arr =
+    Array.init
+      (Array.length arr / width)
+      (fun i -> Array.init width (fun j -> arr.((i * width) + j)))
 end
 
 let is_odd n = n land 1 = 1
