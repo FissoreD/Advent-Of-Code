@@ -230,3 +230,5 @@ let open_submodule f1 f2 = function
   | 1 -> f1
   | 2 -> f2
   | _ -> invalid_arg "3rd param should be 1 or 2"
+
+let print_int = Printf.printf "%d\n"
