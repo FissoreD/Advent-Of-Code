@@ -2,7 +2,8 @@
 
 open String
 
-let cnt = Lib.read_file "16" "07" (Re.Str.split (Re.Str.regexp {|\(\[\|\]\)|}))
+let cnt () =
+  Lib.read_file "16" "07" (Re.Str.split (Re.Str.regexp {|\(\[\|\]\)|}))
 
 module P1 = struct
   let rec has_abba_word ?(pos = 0) s =
@@ -21,7 +22,7 @@ module P1 = struct
         else is_valid_line ~is_valid:(has_abba_word h1 || is_valid) tl
     | [ hd ] -> is_valid || has_abba_word hd
 
-  let main () = List.filter is_valid_line cnt |> List.length
+  let main cnt = List.filter is_valid_line cnt |> List.length
 end
 
 module P2 = struct
@@ -45,8 +46,8 @@ module P2 = struct
         is_valid_line ~aba:(aba_words h1 @ aba) ~bab:(aba_words h2 @ bab) tl
     | [ hd ] -> is_valid_line ~aba:(aba_words hd @ aba) ~bab []
 
-  let main () = List.filter is_valid_line cnt |> List.length
+  let main cnt = List.filter is_valid_line cnt |> List.length
 end
 
-let part1 () = P1.main () |> string_of_int |> print_endline
-let part2 () = P2.main () |> string_of_int |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
+let part2 () = P2.main (cnt ()) |> string_of_int |> print_endline

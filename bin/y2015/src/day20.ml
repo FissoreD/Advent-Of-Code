@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/20 *)
 
-let cnt = Lib.read_file "15" "20" String.trim |> List.hd |> int_of_string
+let cnt () = Lib.read_file "15" "20" String.trim |> List.hd |> int_of_string
 
 module P1 = struct
   let number_presents = 10
@@ -56,5 +56,5 @@ module P2 = struct
     aux 1
 end
 
-let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main cnt |> print_int
+let part1 () = P1.main (cnt ()) |> print_int
+let part2 () = P2.main (cnt ()) |> print_int

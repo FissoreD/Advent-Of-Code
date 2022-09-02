@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/8 *)
 
-let cnt = Lib.read_file "15" "08" Lib.id
+let cnt () = Lib.read_file "15" "08" Lib.id
 
 module P1 = struct
   let rec len_char_list acc = function
@@ -29,5 +29,5 @@ module P2 = struct
     |> List.fold_left (fun acc (a, b) -> acc + a - b) 0
 end
 
-let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main cnt |> print_int
+let part1 () = P1.main (cnt ()) |> print_int
+let part2 () = P2.main (cnt ()) |> print_int

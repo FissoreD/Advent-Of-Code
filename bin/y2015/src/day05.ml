@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/5 *)
 
-let cnt = Lib.read_file "15" "05" Lib.id
+let cnt () = Lib.read_file "15" "05" Lib.id
 
 module P1 = struct
   let is_fine s =
@@ -40,5 +40,5 @@ module P2 = struct
     List.map is_fine x |> List.map Lib.bool_to_int |> List.fold_left ( + ) 0
 end
 
-let part1 () = P1.is_fine_fold cnt |> print_int
-let part2 () = P2.is_fine_fold cnt |> print_int
+let part1 () = P1.is_fine_fold (cnt ()) |> print_int
+let part2 () = P2.is_fine_fold (cnt ()) |> print_int

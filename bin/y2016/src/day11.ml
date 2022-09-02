@@ -13,7 +13,7 @@ let make_row a is_c =
   if is_c then { chip = a; gen = [] } else { chip = []; gen = a }
 
 (* Chip 'a is fired if it is with a ~'a generator && without the 'a generator *)
-let cnt =
+let cnt () =
   let regex = regexp {|\([^- ]*\)\(-[^ ]*\)? \([^ ]*\)|} in
   let parse_line l =
     Re.Str.global_replace (Re.Str.regexp {|\(,\|\.\)|}) "" l
@@ -96,7 +96,7 @@ module P1 = struct
     let same_length a b = diff_len a b false || diff_len a b true in
     e_pos1 <> elev_pos || exists2 same_length d1 diagram
 
-  let main ?(cnt = cnt) () =
+  let main cnt =
     let height = length cnt - 1 in
     let materials_nb = map sum_lengths cnt |> fold_left ( + ) 0 in
     let has_finished diagram = sum_lengths @@ hd diagram = materials_nb in
@@ -134,13 +134,13 @@ end
 module P2 = struct
   let couple = [ "elerium"; "dilithium" ]
 
-  let build_new_cnt () =
+  let build_new_cnt cnt =
     match List.rev cnt with
     | hd :: tl -> List.rev (row_concat hd { gen = couple; chip = couple } :: tl)
     | _ -> raise Exit
 
-  let main = P1.main ~cnt:(build_new_cnt ())
+  let main cnt = P1.main (build_new_cnt cnt)
 end
 
-let part1 () = P1.main () |> printf "%d\n"
-let part2 () = P2.main () |> printf "%d\n"
+let part1 () = P1.main (cnt ()) |> printf "%d\n"
+let part2 () = P2.main (cnt ()) |> printf "%d\n"

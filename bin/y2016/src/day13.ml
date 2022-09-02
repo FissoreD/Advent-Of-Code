@@ -2,7 +2,7 @@
 
 type coor = { x : int; y : int }
 
-let cnt = Lib.read_file "16" "13" int_of_string |> List.hd
+let cnt () = Lib.read_file "16" "13" int_of_string |> List.hd
 
 module P1 = struct
   let start_pos = { x = 1; y = 1 }
@@ -16,7 +16,7 @@ module P1 = struct
     [ { x = x + 1; y }; { x = x - 1; y }; { x; y = y + 1 }; { x; y = y - 1 } ]
     |> List.filter (fun pos -> is_valid pos && is_open pos cnt)
 
-  let main ?(dest = { x = 31; y = 39 }) () =
+  let main ?(dest = { x = 31; y = 39 }) cnt =
     let explored, queue = (ref [], Queue.create ()) in
     let current_pos = ref (0, start_pos) in
     Queue.push (0, start_pos) queue;
@@ -31,7 +31,7 @@ module P1 = struct
 end
 
 module P2 = struct
-  let main ?(max_dist = 50) () =
+  let main ?(max_dist = 50) cnt =
     let explored, queue, res = (ref [], Queue.create (), ref 0) in
     let current_pos = ref (0, P1.start_pos) in
     Queue.push (0, P1.start_pos) queue;
@@ -49,5 +49,5 @@ module P2 = struct
     !res
 end
 
-let part1 () = P1.main () |> Printf.printf "%d\n"
-let part2 () = P2.main ~max_dist:50 () |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> Printf.printf "%d\n"
+let part2 () = P2.main (cnt ()) |> Printf.printf "%d\n"

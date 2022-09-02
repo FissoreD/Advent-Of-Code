@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/13 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "15" "13" (fun f ->
       Re.Str.replace_first (Re.Str.regexp "\\.") "" f
       |> String.split_on_char ' ')
@@ -70,5 +70,5 @@ module P2 = struct
     aux [] (SetPerson.elements set) |> P1.main
 end
 
-let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main cnt |> print_int
+let part1 () = P1.main (cnt ()) |> print_int
+let part2 () = P2.main (cnt ()) |> print_int

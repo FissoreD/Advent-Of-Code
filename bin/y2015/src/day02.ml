@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/2 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "15" "02" Lib.id
   |> List.map (String.split_on_char 'x')
   |> List.map (function
@@ -11,7 +11,7 @@ let cnt =
            print_endline ("Here" ^ f);
            raise Lib.Invalid_input)
 
-module Part1Module = struct
+module P1 = struct
   let total_area_counter cnt =
     List.map
       (fun (l, w, h) ->
@@ -21,7 +21,7 @@ module Part1Module = struct
     |> List.fold_left ( + ) 0
 end
 
-module Part2Module = struct
+module P2 = struct
   let total_area_counter cnt =
     List.map
       (fun (l, w, h) ->
@@ -35,5 +35,5 @@ module Part2Module = struct
     |> List.fold_left ( + ) 0
 end
 
-let part1 () = cnt |> Part1Module.total_area_counter |> print_int
-let part2 () = cnt |> Part2Module.total_area_counter |> print_int
+let part1 () = cnt () |> P1.total_area_counter |> print_int
+let part2 () = cnt () |> P2.total_area_counter |> print_int

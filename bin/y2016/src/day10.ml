@@ -8,7 +8,7 @@ type valueGoes = { bot_nb : int; cnt : int }
 type instr = BotGives of botGives | ValueGoes of valueGoes
 type bots = (bool * int) list
 
-let cnt =
+let cnt () =
   let to_int = int_of_string in
   let funct l =
     if String.starts_with ~prefix:"bot" l then (
@@ -58,7 +58,7 @@ module P1 = struct
          a
       |> List.fold_left max 0 |> ( + ) 1)
 
-  let main ?(c1 = 17) ?(c2 = 61) () : int =
+  let main ?(c1 = 17) ?(c2 = 61) cnt : int =
     let a, b = split_cnt cnt in
     let total_bot_number = find_total_bot_number a b in
     let bots = build_bots (init total_bot_number (fun _ -> [||])) b in
@@ -85,8 +85,8 @@ module P1 = struct
 end
 
 module P2 = struct
-  let main () : int = P1.main ~c1:(-1) ~c2:(-1) ()
+  let main = P1.main ~c1:(-1) ~c2:(-1)
 end
 
-let part1 () = P1.main () |> string_of_int |> print_endline
-let part2 () = P2.main () |> string_of_int |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
+let part2 () = P2.main (cnt ()) |> string_of_int |> print_endline

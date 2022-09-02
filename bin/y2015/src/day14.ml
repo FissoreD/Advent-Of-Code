@@ -1,5 +1,5 @@
 (* https://adventofcode.com/2015/day/14 *)
-let cnt =
+let cnt () =
   let l = Lib.read_file "15" "14" (String.split_on_char ' ') in
   let open List in
   map
@@ -40,5 +40,5 @@ module P2 = struct
     Array.fold_left (fun acc value -> max acc !value) 0 arr
 end
 
-let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main cnt |> print_int
+let part1 () = P1.main (cnt ()) |> print_int
+let part2 () = P2.main (cnt ()) |> print_int

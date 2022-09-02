@@ -2,7 +2,7 @@
 
 type disk = { pos : int; size : int }
 
-let cnt : disk list =
+let cnt () =
   let open Re.Str in
   let i = int_of_string in
   let func l =
@@ -28,7 +28,7 @@ module P1 = struct
     in
     aux 2 incr (List.tl dl)
 
-  let main ?(cnt = cnt) () =
+  let main cnt =
     let rec aux x incr =
       let a, b = is_valid cnt x incr in
       if a then x else aux (x + b) b
@@ -37,9 +37,9 @@ module P1 = struct
 end
 
 module P2 = struct
-  let cnt = cnt @ [ { pos = 0; size = 11 } ]
-  let main = P1.main ~cnt
+  let new_cnt cnt = cnt @ [ { pos = 0; size = 11 } ]
+  let main cnt = P1.main (new_cnt cnt)
 end
 
-let part1 () = P1.main () |> Printf.printf "%d\n"
-let part2 () = P2.main () |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> Printf.printf "%d\n"
+let part2 () = P2.main (cnt ()) |> Printf.printf "%d\n"

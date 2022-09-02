@@ -2,4 +2,4 @@
 
 (library
  (name y2017)
- (libraries lib))
+ (libraries lib re))

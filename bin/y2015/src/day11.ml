@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/11 *)
 
-let cnt = Lib.read_file "15" "11" Lib.string_2_char_list |> List.hd
+let cnt () = Lib.read_file "15" "11" Lib.string_2_char_list |> List.hd
 
 module P1 = struct
   let char_a = int_of_char 'a'
@@ -53,5 +53,5 @@ module P2 = struct
   let main x = P1.main x |> P1.find_next_word
 end
 
-let part1 () = P1.main cnt |> P1.print
-let part2 () = P2.main cnt |> P1.print
+let part1 () = P1.main (cnt ()) |> P1.print
+let part2 () = P2.main (cnt ()) |> P1.print

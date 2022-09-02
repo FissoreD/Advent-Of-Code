@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/16 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "16" "16" (fun l ->
       Lib.string_2_char_list l |> List.map (( = ) '1'))
   |> List.hd |> Array.of_list
@@ -22,7 +22,7 @@ module P1 = struct
   let next (div, reminder) m =
     if reminder + 1 = m then (div + 1, 0) else (div, reminder + 1)
 
-  let main ?(inp = cnt) ?(len = 272) () =
+  let main ?(len = 272) inp =
     let arr_len = Array.length inp in
     let cnt_rev = Array.init arr_len (fun i -> not inp.(arr_len - i - 1)) in
     let checksum_str_len, res_len = height len in
@@ -39,5 +39,5 @@ module P1 = struct
     res |> Array.fold_left (fun acc e -> acc ^ if e then "1" else "0") ""
 end
 
-let part1 () = P1.main () |> print_endline
-let part2 () = P1.main ~len:35651584 () |> print_endline
+let part1 () = P1.main (cnt ()) |> print_endline
+let part2 () = P1.main ~len:35651584 (cnt ()) |> print_endline

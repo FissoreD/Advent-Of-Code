@@ -7,7 +7,7 @@ type instr =
   | RotateX of rotate
   | RotateY of rotate
 
-let cnt =
+let cnt () =
   let open String in
   let open Lib.List in
   let funct line =
@@ -54,19 +54,19 @@ module P1 = struct
           arr.(n).(0) <- last
         done
 
-  let update_array arr =
+  let update_array arr cnt =
     List.iter (apply_inst arr) cnt;
     arr
 
-  let main () =
-    let arr = update_array (make_screen ()) in
+  let main cnt =
+    let arr = update_array (make_screen ()) cnt in
     Array.map (Array.map (function '#' -> 1 | _ -> 0)) arr
     |> Array.fold_left (Array.fold_left ( + )) 0
 end
 
 module P2 = struct
-  let main () =
-    let arr = P1.update_array @@ make_screen () in
+  let main cnt =
+    let arr = P1.update_array (make_screen ()) cnt in
     for j = 0 to Array.length arr.(0) - 1 do
       for i = 0 to Array.length arr - 1 do
         print_char arr.(i).(j)
@@ -75,5 +75,5 @@ module P2 = struct
     done
 end
 
-let part1 () = P1.main () |> string_of_int |> print_endline
-let part2 () = P2.main ()
+let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
+let part2 () = P2.main (cnt ())

@@ -28,7 +28,7 @@ let operations : (string * (string * int -> memory -> memory)) list =
           else pos + 1 ) );
   ]
 
-let cnt =
+let cnt () =
   Lib.read_file "15" "23" (fun e ->
       let l = String.split_on_char ' ' e in
       (assoc (List.hd l) operations)
@@ -41,15 +41,17 @@ let cnt =
         | _ -> invalid_arg "Error not in list"))
 
 let part1 () =
-  let memory, stop = (((0, 0), 0), length cnt) in
+  let cnt_computed = cnt () in
+  let memory, stop = (((0, 0), 0), length cnt_computed) in
   let rec aux (((_r1, r2), pos) as memory) =
-    if pos >= stop then r2 else aux ((nth cnt pos) memory)
+    if pos >= stop then r2 else aux ((nth cnt_computed pos) memory)
   in
   aux memory |> print_int
 
 let part2 () =
-  let memory, stop = (((1, 0), 0), length cnt) in
+  let cnt_computed = cnt () in
+  let memory, stop = (((1, 0), 0), length cnt_computed) in
   let rec aux (((_r1, r2), pos) as memory) =
-    if pos >= stop then r2 else aux ((nth cnt pos) memory)
+    if pos >= stop then r2 else aux ((nth cnt_computed pos) memory)
   in
   aux memory |> print_int

@@ -9,7 +9,7 @@ type grid_info = {
   mutable content_pos : Pos.t;
 }
 
-let cnt =
+let cnt () =
   let open List in
   let open Re.Str in
   let i, m = (int_of_string, matched_group) in
@@ -32,7 +32,7 @@ module P1 = struct
   let is_empty { used; _ } = used = 0
   let fit current hd = current.used <= hd.avail
 
-  let main () =
+  let main cnt =
     let sorted_by_used_decr =
       List.sort (fun a b -> compare b.used a.used) cnt
     in
@@ -75,8 +75,8 @@ module P2 = struct
     let arr =
       Array.init (w * h) (fun i ->
           let pos = int_to_pos i w in
-          let cnt = (get_value w arr pos).used in
-          if cnt <= (get_value w arr start_pos).size then Some "." else None)
+          let content = (get_value w arr pos).used in
+          if content <= (get_value w arr start_pos).size then Some "." else None)
     in
     { w; h; current_pos = start_pos; arr; content_pos = { x = w - 1; y = 0 } }
 
@@ -96,11 +96,11 @@ module P2 = struct
   let shortest_path { w; arr; current_pos; content_pos; _ } =
     Pos.shortest_path_len (Lib.Array.to_matrix w arr) current_pos content_pos
 
-  let main () =
+  let main cnt =
     let maze = build_matrix cnt in
     let dist = shortest_path maze in
     ((maze.w - 2) * 5) + dist
 end
 
-let part1 () = P1.main () |> Printf.printf "%d\n"
-let part2 () = P2.main () |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> Printf.printf "%d\n"
+let part2 () = P2.main (cnt ()) |> Printf.printf "%d\n"

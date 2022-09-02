@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/2 *)
 
-let cnt = Lib.read_file "16" "02" Lib.string_2_char_list
+let cnt () = Lib.read_file "16" "02" Lib.string_2_char_list
 
 type pos = { x : int; y : int }
 
@@ -20,7 +20,7 @@ module P1 = struct
     in
     if is_valid pos then pos else { x; y }
 
-  let main ?(next_pos = next_pos) ?(pos = ref { x = 1; y = 1 }) ?(pad = pad) ()
+  let main ?(next_pos = next_pos) ?(pos = ref { x = 1; y = 1 }) ?(pad = pad) cnt
       =
     List.map
       (fun e ->
@@ -57,5 +57,5 @@ module P2 = struct
   let main = P1.main ~next_pos ~pad ~pos:(ref { x = 0; y = 2 })
 end
 
-let part1 () = P1.main () |> print_endline
-let part2 () = P2.main () |> print_endline
+let part1 () = P1.main (cnt ()) |> print_endline
+let part2 () = P2.main (cnt ()) |> print_endline

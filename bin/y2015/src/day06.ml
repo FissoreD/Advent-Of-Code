@@ -15,7 +15,7 @@ let parse_line l =
       (operation, str_to_int_couple from, str_to_int_couple upto)
   | _ -> raise Lib.Invalid_input
 
-let cnt = Lib.read_file "15" "06" parse_line
+let cnt () = Lib.read_file "15" "06" parse_line
 
 module P1 = struct
   let treat_operation = function
@@ -56,6 +56,7 @@ end
 let x, y = (1000, 1000)
 
 let part1 () =
-  P1.main (Array.init x (fun _ -> Array.make y false)) cnt |> print_int
+  P1.main (Array.init x (fun _ -> Array.make y false)) (cnt ()) |> print_int
 
-let part2 () = P2.main (Array.init x (fun _ -> Array.make y 0)) cnt |> print_int
+let part2 () =
+  P2.main (Array.init x (fun _ -> Array.make y 0)) (cnt ()) |> print_int

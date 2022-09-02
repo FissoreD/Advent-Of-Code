@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/17 *)
 
-let cnt = Lib.read_file "16" "17" Lib.id |> List.hd
+let cnt () = Lib.read_file "16" "17" Lib.id |> List.hd
 
 type position = { x : int; y : int }
 type dir = U | D | L | R
@@ -29,7 +29,7 @@ module P1 = struct
     List.mapi (fun pos e -> if is_open x.[pos] then Some e else None) pos_list
     |> List.filter_map Lib.id
 
-  let main () =
+  let main cnt =
     let to_explore = Queue.create () in
     let current_pos = ref ({ x = 0; y = 0 }, "") in
     Queue.add !current_pos to_explore;
@@ -47,7 +47,7 @@ module P1 = struct
 end
 
 module P2 = struct
-  let main () =
+  let main cnt =
     let q = Queue.create () in
     let current_pos = ref ({ x = 0; y = 0 }, "") in
     Queue.add !current_pos q;
@@ -67,5 +67,5 @@ module P2 = struct
     !longest_valid
 end
 
-let part1 () = P1.main () |> print_endline
-let part2 () = P2.main () |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> print_endline
+let part2 () = P2.main (cnt ()) |> Printf.printf "%d\n"

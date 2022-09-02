@@ -7,7 +7,7 @@ type sue = {
   cnt : (string * int) * (string * int) * (string * int);
 }
 
-let cnt =
+let cnt () =
   Lib.read_file "15" "16" (String.split_on_char ' ')
   |> List.map (function
        | _ :: name :: t1 :: a :: t2 :: b :: t3 :: c :: _ ->
@@ -65,9 +65,9 @@ module P2 = struct
 end
 
 let part1 () =
-  P1.count_valid known_properties cnt
-  |> List.iter (function { name; _ } -> print_string name)
+  P1.count_valid known_properties (cnt ())
+  |> List.iter (fun { name; _ } -> print_string name)
 
 let part2 () =
-  P2.count_valid known_properties cnt
-  |> List.iter (function { name; _ } -> print_string name)
+  P2.count_valid known_properties (cnt ())
+  |> List.iter (fun { name; _ } -> print_string name)

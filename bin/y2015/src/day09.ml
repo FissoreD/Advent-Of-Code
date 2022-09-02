@@ -14,7 +14,7 @@ end)
 
 module MySet = Set.Make (String)
 
-let cnt =
+let cnt () =
   Lib.read_file "15" "09" (String.split_on_char ' ')
   |> List.map (function
        | [ start; _; dest; _; dist ] -> (start, dest, dist |> int_of_string)
@@ -91,5 +91,5 @@ module P2 = struct
   let main v = v |> P1.solve ( - ) |> ( * ) (-1)
 end
 
-let part1 () = P1.main (P1.makeMap cnt) |> print_int
-let part2 () = P2.main (P1.makeMap cnt) |> print_int
+let part1 () = P1.main (P1.makeMap (cnt ())) |> print_int
+let part2 () = P2.main (P1.makeMap (cnt ())) |> print_int

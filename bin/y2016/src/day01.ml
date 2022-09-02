@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/1 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "16" "01" (Re.Str.split (Re.Str.regexp ", "))
   |> List.hd
   |> List.map (fun e ->
@@ -22,7 +22,7 @@ module P1 = struct
     in
     { x = x + (dir.x * dist); y = y + (dir.y * dist); dir }
 
-  let main () =
+  let main cnt =
     List.fold_left next_pos { x = 0; y = 0; dir = { x = 0; y = 1 } } cnt |> dist
 end
 
@@ -40,7 +40,7 @@ module P2 = struct
         else { p1 with x = p1.x; y = p1.y + 1 })
         p2 list_hd
 
-  let main () =
+  let main cnt =
     let rec aux acc_list pos l =
       let intermediate, acc_list =
         if acc_list = [] then ([], [ pos ])
@@ -59,5 +59,5 @@ module P2 = struct
     aux [] { x = 0; y = 0; dir = { x = 0; y = 1 } } cnt
 end
 
-let part1 () = P1.main () |> string_of_int |> print_endline
-let part2 () = P2.main () |> string_of_int |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
+let part2 () = P2.main (cnt ()) |> string_of_int |> print_endline

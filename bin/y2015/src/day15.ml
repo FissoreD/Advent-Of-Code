@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/15 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "15" "15" (String.split_on_char ' ')
   |> List.map (fun sub ->
          sub
@@ -94,7 +94,7 @@ let part1 () =
        (function
          | a :: b :: c :: d :: e :: _ -> [ a; b; c; d; e ]
          | _ -> invalid_arg "Error")
-       cnt)
+       (cnt ()))
   |> print_int
 
-let part2 () = P2.main cnt |> print_int
+let part2 () = P2.main (cnt ()) |> print_int

@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/12 *)
 
-let cnt = Lib.read_file "15" "12" Lib.id |> List.hd
+let cnt () = Lib.read_file "15" "12" Lib.id |> List.hd
 
 module P1 = struct
   let parse_line line =
@@ -32,5 +32,5 @@ module P2 = struct
     aux cnt_parsed
 end
 
-let part1 () = P1.parse_line cnt |> print_int
-let part2 () = P2.remove_red cnt |> print_int
+let part1 () = P1.parse_line (cnt ()) |> print_int
+let part2 () = P2.remove_red (cnt ()) |> print_int

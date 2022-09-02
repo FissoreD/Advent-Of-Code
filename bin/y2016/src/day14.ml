@@ -3,7 +3,7 @@
 type hist_cell = { key : string; i : int; hash : string; five_list : char list }
 type history = hist_cell Deque.t
 
-let cnt = Lib.read_file "16" "14" Lib.id |> List.hd
+let cnt () = Lib.read_file "16" "14" Lib.id |> List.hd
 
 module P1 = struct
   let hash base i = Lib.md5_to_hex @@ Printf.sprintf "%s%d" base i
@@ -48,7 +48,7 @@ module P1 = struct
            List.exists (fun e -> same3 = Some e) five_list)
          history
 
-  let main ?(alt = 64) ?(hash = hash) () =
+  let main ?(alt = 64) ?(hash = hash) cnt =
     let base = cnt in
     let q = next_1000 hash base 0 in
     let rec aux alt i =
@@ -72,5 +72,5 @@ module P2 = struct
   let main = P1.main ~hash
 end
 
-let part1 () = P1.main () |> Printf.printf "%d\n"
-let part2 () = P2.main () |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> Printf.printf "%d\n"
+let part2 () = P2.main (cnt ()) |> Printf.printf "%d\n"

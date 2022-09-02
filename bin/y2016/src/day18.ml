@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/18 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "16" "18" (fun e ->
       Array.init (String.length e) (fun i -> e.[i]))
   |> List.hd
@@ -23,7 +23,7 @@ module P1 = struct
   let count_symbols =
     Array.fold_left (fun acc e -> acc + if is_safe e then 1 else 0) 0
 
-  let main ?(row_nb = 40) () =
+  let main ?(row_nb = 40) cnt =
     let len = Array.length cnt in
     let arr1, arr2 = (cnt, Array.make len safe) in
     let rec aux acc a b = function
@@ -35,5 +35,5 @@ module P1 = struct
     aux 0 arr1 arr2 row_nb
 end
 
-let part1 () = P1.main () |> Printf.printf "%d\n"
-let part2 () = P1.main ~row_nb:400000 () |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> Printf.printf "%d\n"
+let part2 () = P1.main ~row_nb:400000 (cnt ()) |> Printf.printf "%d\n"

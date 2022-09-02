@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/4 *)
 
-let cnt =
+let cnt () =
   match Lib.read_file "15" "04" Lib.id with
   | [ a ] -> a
   | _ -> raise Lib.Invalid_input
@@ -13,5 +13,5 @@ let find_brute_force s len =
   in
   aux 0
 
-let part1 () = find_brute_force cnt 5 |> print_int
-let part2 () = find_brute_force cnt 6 |> print_int
+let part1 () = find_brute_force (cnt ()) 5 |> print_int
+let part2 () = find_brute_force (cnt ()) 6 |> print_int

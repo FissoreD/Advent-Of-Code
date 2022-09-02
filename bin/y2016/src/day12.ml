@@ -4,6 +4,8 @@ open Lib.List
 type memory = { a : int; b : int; c : int; d : int; i : int }
 
 let operations =
+  Lazy.from_val
+  @@
   let incr mem = { mem with i = mem.i + 1 } in
   let get m = function "a" -> m.a | "b" -> m.b | "c" -> m.c | _ -> m.d in
   let ternary_opt mem v = if Lib.is_int v then int_of_string v else get mem v in
@@ -23,10 +25,10 @@ let operations =
         if res = 0 then incr mem else { mem with i = mem.i + s } );
   ]
 
-let cnt =
+let cnt () =
   Lib.read_file "16" "12" (fun e ->
       let l = String.split_on_char ' ' e in
-      (assoc (List.hd l) operations)
+      (assoc (List.hd l) (Lazy.force operations))
         (match l with
         | "inc" :: [ r ] | "dec" :: [ r ] -> (-1, r, "")
         | "cpy" :: a :: [ r ] -> (-1, r, a)
@@ -34,8 +36,9 @@ let cnt =
         | _ -> invalid_arg "Error not in list"))
 
 let part1 ?(m = { a = 0; b = 0; c = 0; d = 0; i = 0 }) () =
-  let alt = length cnt in
-  let rec aux m = if m.i >= alt then m.a else aux ((nth cnt m.i) m) in
+  let computed_cnt = cnt () in
+  let alt = length computed_cnt in
+  let rec aux m = if m.i >= alt then m.a else aux ((nth computed_cnt m.i) m) in
   aux m |> print_int
 
 let part2 ?(m = { a = 0; b = 0; c = 1; d = 0; i = 0 }) = part1 ~m

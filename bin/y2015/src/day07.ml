@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/7 *)
 
-let cnt = Lib.read_file "15" "07" (String.split_on_char ' ')
+let cnt () = Lib.read_file "15" "07" (String.split_on_char ' ')
 
 module MyMap = Map.Make (String)
 
@@ -52,9 +52,10 @@ module P1 = struct
     aux MyMap.empty rules
 end
 
-let part1 () = P1.main cnt |> MyMap.find "a" |> print_int
+let part1 () = P1.main (cnt ()) |> MyMap.find "a" |> print_int
 
 let part2 () =
+  let cnt = cnt () in
   let res = P1.main cnt |> MyMap.find "a" in
   let new_cnt =
     let rec aux acc = function

@@ -6,11 +6,11 @@ module MySet = Set.Make (struct
   let compare = compare
 end)
 
-let cnt =
-  let cnt = Lib.read_file "15" "19" Lib.id |> List.rev in
-  let str = List.hd cnt |> Lib.string_2_char_list in
+let cnt () =
+  let res = Lib.read_file "15" "19" Lib.id |> List.rev in
+  let str = List.hd res |> Lib.string_2_char_list in
   let map =
-    List.tl cnt |> List.tl
+    List.tl res |> List.tl
     |> List.map Re.Str.(split_delim (regexp " => "))
     |> List.map (function
          | [ h1; h2 ] ->
@@ -67,5 +67,5 @@ module P2 = struct
   let main str = count_maj str - count_Rn_Ar str - (2 * count_Y str) - 1
 end
 
-let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main (cnt |> fst |> Lib.char_list_2_string) |> print_int
+let part1 () = P1.main (cnt ()) |> print_int
+let part2 () = P2.main (cnt () |> fst |> Lib.char_list_2_string) |> print_int

@@ -1,8 +1,8 @@
 (* https://adventofcode.com/2015/day/1 *)
 
-let cnt = Lib.read_file "15" "01" Lib.string_2_char_list
+let cnt () = Lib.read_file "15" "01" Lib.string_2_char_list
 
-module Part1Module = struct
+module P1 = struct
   let count_parenthesis n =
     let rec aux counter = function
       | [] -> counter
@@ -13,7 +13,7 @@ module Part1Module = struct
     aux 0 n
 end
 
-module Part2Module = struct
+module P2 = struct
   let count_first_down n =
     let rec aux pos counter l =
       if counter = -1 then pos
@@ -28,11 +28,11 @@ module Part2Module = struct
 end
 
 let part1 () =
-  match cnt with
-  | [ cnt ] -> cnt |> Part1Module.count_parenthesis |> print_int
+  match cnt () with
+  | [ cnt ] -> cnt |> P1.count_parenthesis |> print_int
   | _ -> raise Lib.Invalid_input
 
 let part2 () =
-  match cnt with
-  | [ cnt ] -> cnt |> Part2Module.count_first_down |> print_int
+  match cnt () with
+  | [ cnt ] -> cnt |> P2.count_first_down |> print_int
   | _ -> raise Lib.Invalid_input

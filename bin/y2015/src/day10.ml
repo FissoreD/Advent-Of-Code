@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/10 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "15" "10" Lib.id
   |> List.hd |> Lib.string_2_char_list
   |> List.map Lib.string_of_char
@@ -25,5 +25,5 @@ module P2 = struct
   let main cnt = P1.evolve_n_times 50 cnt |> List.length
 end
 
-let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main cnt |> print_int
+let part1 () = P1.main (cnt ()) |> print_int
+let part2 () = P2.main (cnt ()) |> print_int

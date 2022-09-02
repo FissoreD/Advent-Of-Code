@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/24 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "16" "24" (fun e ->
       Array.init (String.length e) (fun pos ->
           if e.[pos] = '#' then None else Some e.[pos]))
@@ -52,10 +52,10 @@ module P1 = struct
       (Lib.permutations (List.init (List.length goal_pos) Lib.id))
     |> List.fold_left min max_int
 
-  let main ?(go_back = false) () =
+  let main ?(go_back = false) cnt =
     let goal_pos, start = get_goal_pos_list cnt in
     find_shortest_path ~go_back cnt start goal_pos
 end
 
-let part1 () = P1.main () |> Lib.print_int
-let part2 () = P1.main ~go_back:true () |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> Lib.print_int
+let part2 () = P1.main ~go_back:true (cnt ()) |> Lib.print_int

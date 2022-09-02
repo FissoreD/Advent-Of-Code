@@ -1,13 +1,13 @@
 (* https://adventofcode.com/2016/day/3 *)
 
-let cnt =
+let cnt () =
   Lib.read_file "16" "03" (fun e ->
       String.split_on_char ' ' e
       |> List.filter (( <> ) "")
       |> List.map int_of_string)
 
 module P1 = struct
-  let main ?(cnt = cnt) () =
+  let main cnt =
     List.map (List.sort compare) cnt
     |> List.filter (fun e ->
            match e with [ a; b; c ] -> a + b > c | _ -> false)
@@ -15,8 +15,8 @@ module P1 = struct
 end
 
 module P2 = struct
-  let main () =
-    let cnt =
+  let main cnt =
+    let new_cnt =
       List.init (List.length cnt) (fun pos ->
           let start_pos = 3 * (pos / 3) in
           let modolus = pos mod 3 in
@@ -27,8 +27,8 @@ module P2 = struct
               get (start_pos + 2) cnt |> get modolus;
             ])
     in
-    P1.main ~cnt ()
+    P1.main new_cnt
 end
 
-let part1 () = P1.main () |> string_of_int |> print_endline
-let part2 () = P2.main () |> string_of_int |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
+let part2 () = P2.main (cnt ()) |> string_of_int |> print_endline

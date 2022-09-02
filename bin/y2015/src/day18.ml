@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/18 *)
 
-let cnt =
+let cnt () =
   let l = Lib.read_file "15" "18" Lib.string_2_char_list in
   let arr _ = Array.make (List.length @@ List.hd l) '.' in
   let mat = Array.init (List.length l) arr in
@@ -67,5 +67,5 @@ module P2 = struct
         main new_arr (n - 1)
 end
 
-let part1 () = P1.main cnt 100 |> print_int
-let part2 () = P2.main cnt 100 |> print_int
+let part1 () = P1.main (cnt ()) 100 |> print_int
+let part2 () = P2.main (cnt ()) 100 |> print_int

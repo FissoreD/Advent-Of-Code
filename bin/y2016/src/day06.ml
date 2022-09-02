@@ -2,12 +2,12 @@
 
 open Lib
 
-let cnt =
+let cnt () =
   Lib.read_file "16" "06" (fun e -> string_2_char_list e |> Array.of_list)
   |> Array.of_list
 
 module P1 = struct
-  let main ?(sort_fun = compare) () =
+  let main ?(sort_fun = compare) cnt =
     let res = ref "" in
     for i = 0 to Array.length cnt.(0) - 1 do
       let letters =
@@ -29,5 +29,5 @@ module P2 = struct
         if a = 0 then min_int else if b = 0 then max_int else b - a)
 end
 
-let part1 () = P1.main () |> print_endline
-let part2 () = P2.main () |> print_endline
+let part1 () = P1.main (cnt ()) |> print_endline
+let part2 () = P2.main (cnt ()) |> print_endline

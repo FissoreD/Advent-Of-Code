@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/17 *)
 
-let cnt = Lib.read_file "15" "17" int_of_string |> List.sort compare
+let cnt () = Lib.read_file "15" "17" int_of_string |> List.sort compare
 
 module P1 = struct
   let goal = 150
@@ -33,5 +33,5 @@ module P2 = struct
     List.filter (( = ) (List.hd l)) l |> List.length
 end
 
-let part1 () = P1.main cnt |> print_int
-let part2 () = P2.main cnt |> print_int
+let part1 () = P1.main (cnt ()) |> print_int
+let part2 () = P2.main (cnt ()) |> print_int
