@@ -57,5 +57,5 @@ module P1 = struct
     find_shortest_path ~go_back cnt start goal_pos
 end
 
-let part1 () = Lib.timeit (fun () -> P1.main ()) |> Lib.print_int
+let part1 () = P1.main () |> Lib.print_int
 let part2 () = P1.main ~go_back:true () |> Lib.print_int
