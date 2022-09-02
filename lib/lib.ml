@@ -2,8 +2,7 @@ let openF y s = "bin/y20" ^ y ^ "/input/day" ^ s ^ ".txt" |> open_in
 let closeF = close_in
 
 (** 
-  Takes an year, a day and a function to parse each line of the 
-  the input file. Returns the List of line parsed
+  Takes an year, a day and a function to parse each line of the the input file. Returns the List of line parsed
 *)
 let read_file year day func =
   let inp = openF year day in
@@ -232,3 +231,21 @@ let open_submodule f1 f2 = function
   | _ -> invalid_arg "3rd param should be 1 or 2"
 
 let print_int = Printf.printf "%d\n"
+
+let rec permutations l =
+  let n = List.length l in
+  if n = 1 then [ l ]
+  else
+    let rec sub acc e = function
+      | [] -> failwith "sub"
+      | h :: t -> if h = e then acc @ t else sub (h :: acc) e t
+    in
+    let rec aux k =
+      let e = List.nth l k in
+      let subperms = permutations (sub [] e l) in
+      let t = List.map (fun a -> e :: a) subperms in
+      if k < n - 1 then List.rev_append t (aux (k + 1)) else t
+    in
+    aux 0
+
+let compare = compare

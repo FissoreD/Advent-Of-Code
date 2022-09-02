@@ -9,30 +9,38 @@ let move_from_dir { x; y } = function
   | L -> { x = x - 1; y }
   | R -> { x = x + 1; y }
 
-let move_from_pos a b = { x = a.x + b.x; y = a.y + b.y }
-let is_positive_pos { x; y } = x >= 0 && y >= 0
-let is_valid_pos (maxX, maxY) p = is_positive_pos p && p.x < maxX && p.y < maxY
+let zero = { x = 0; y = 0 }
+let move_from a b = { x = a.x + b.x; y = a.y + b.y }
+let is_positive { x; y } = x >= 0 && y >= 0
+let is_valid (maxX, maxY) p = is_positive p && p.x < maxX && p.y < maxY
 let neighbors pos = List.map (move_from_dir pos) dir_list
-let positive_neighbors pos = neighbors pos |> List.filter is_positive_pos
-let pos_to_string { x; y } = Printf.sprintf "{x: %d; y=%d}" x y
-let print_pos pos = print_string @@ pos_to_string pos
+let positive_neighbors pos = neighbors pos |> List.filter is_positive
+let to_string { x; y } = Printf.sprintf "{x: %d; y=%d}" x y
+let print pos = print_string @@ to_string pos
 
 let shortest_path_len (grid : 'a option array array) (s : t) (e : t) =
-  let (q : (t * int) Queue.t) = Queue.create () in
-  let explored : t list ref = ref [] in
-  let current = ref (s, 0) in
+  let module T = struct
+    type t = { _x : int; _y : int }
+
+    let compare = compare
+  end in
+  let module Set = Set.Make (T) in
   let w, h = (Array.length grid.(0), Array.length grid) in
+  let to_T { x; y } : T.t = { _x = x; _y = y } in
+  let explored = Hashtbl.create (w * h) in
+  let (q : (t * int) Queue.t) = Queue.create () in
+  let current = ref (s, 0) in
+  let is_valid pos =
+    (not @@ Hashtbl.mem explored (to_T pos))
+    && is_valid (w, h) pos
+    && grid.(pos.y).(pos.x) <> None
+  in
   Queue.add !current q;
   while fst !current <> e do
-    if Queue.is_empty q then invalid_arg "Not such path";
     current := Queue.pop q;
-    if
-      is_valid_pos (w, h) (fst !current)
-      && (not @@ List.mem (fst !current) !explored)
-      && grid.((fst !current).y).((fst !current).x) <> None
-    then (
-      explored := fst !current :: !explored;
-      let neigs = neighbors @@ fst !current in
-      List.iter (fun e -> Queue.add (e, snd !current + 1) q) neigs)
+    let pos, dist = !current in
+    if is_valid pos then (
+      Hashtbl.add explored (to_T pos) 0;
+      List.iter (fun pos -> Queue.add (pos, dist + 1) q) (neighbors pos))
   done;
   snd !current

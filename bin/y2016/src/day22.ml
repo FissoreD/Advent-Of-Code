@@ -72,25 +72,9 @@ module P2 = struct
         (0, 0, { x = 0; y = 0 })
         arr
     in
-    (* print_endline @@ Printf.sprintf "%d %d" w h; *)
     let arr =
       Array.init (w * h) (fun i ->
           let pos = int_to_pos i w in
-          (* print_endline "A";
-             print_endline
-             @@ Printf.sprintf "x %d, y %d, arr size = %d" pos.x pos.y
-                  (Array.length arr); *)
-          (* let max_spage_neigh =
-               Pos.neighbors pos
-               |> List.filter (Pos.is_valid_pos (w, h))
-               |> List.map (fun p ->
-                      Pos.print_pos p;
-                      print_newline ();
-                      get_value w arr p)
-               |> List.map (fun e -> e.size)
-               |> List.fold_left max 0
-             in
-             print_endline "B";*)
           let cnt = (get_value w arr pos).used in
           if cnt <= (get_value w arr start_pos).size then Some "." else None)
     in

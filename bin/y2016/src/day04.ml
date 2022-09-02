@@ -27,9 +27,6 @@ module P1 = struct
             let res = compare !b !a in
             if res = 0 then compare c d else res)
           l;
-        (* Array.iter
-           (fun (a, b) -> Printf.sprintf "--%c %d" a !b |> print_endline)
-           l; *)
         try
           for i = 0 to 4 do
             if String.get check_sum i <> fst l.(i) then raise Exit

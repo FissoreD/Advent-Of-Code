@@ -2,7 +2,7 @@
 open Re.Str
 open Lib.Array
 
-(* low and high bool is true the bot gives to a bot *)
+(* low and high bool is true if the bot gives to a bot *)
 type botGives = { bot_nb : int; low : bool * int; high : bool * int }
 type valueGoes = { bot_nb : int; cnt : int }
 type instr = BotGives of botGives | ValueGoes of valueGoes

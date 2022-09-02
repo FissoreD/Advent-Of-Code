@@ -18,7 +18,6 @@ module P2 = struct
   let len = 8
 
   let rec main ?(nmb = 0) ?(res = Array.make len " ") ?(found_len = ref 0) () =
-    (* Array.fold_left ( ^ ) "" res |> print_endline; *)
     if !found_len = len then Array.fold_left ( ^ ) "" res
     else
       let word = Lib.md5_to_hex (cnt ^ string_of_int nmb) in
