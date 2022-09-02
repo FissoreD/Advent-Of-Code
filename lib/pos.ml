@@ -1,7 +1,19 @@
 type t = { x : int; y : int }
 type dir = U | D | L | R
+type dir_diag = N | S | E | W | NE | NW | SE | SW
 
-let dir_list = [ U; D; L; R ]
+let list_dir : dir list = [ U; D; L; R ]
+let list_diag : dir_diag list = [ N; S; E; W; NE; NW; SE; SW ]
+
+let move_from_dir_diag { x; y } = function
+  | N -> { x; y = y - 1 }
+  | S -> { x; y = y + 1 }
+  | W -> { x = x - 1; y }
+  | E -> { x = x + 1; y }
+  | SE -> { x = x + 1; y = y + 1 }
+  | SW -> { x = x - 1; y = y + 1 }
+  | NE -> { x = x + 1; y = y - 1 }
+  | NW -> { x = x - 1; y = y - 1 }
 
 let move_from_dir { x; y } = function
   | U -> { x; y = y - 1 }
@@ -13,7 +25,7 @@ let zero = { x = 0; y = 0 }
 let move_from a b = { x = a.x + b.x; y = a.y + b.y }
 let is_positive { x; y } = x >= 0 && y >= 0
 let is_valid (maxX, maxY) p = is_positive p && p.x < maxX && p.y < maxY
-let neighbors pos = List.map (move_from_dir pos) dir_list
+let neighbors pos = List.map (move_from_dir pos) list_dir
 let positive_neighbors pos = neighbors pos |> List.filter is_positive
 let to_string { x; y } = Printf.sprintf "{x: %d; y=%d}" x y
 let print pos = print_string @@ to_string pos
