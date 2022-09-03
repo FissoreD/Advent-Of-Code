@@ -16,7 +16,7 @@ module P1 = struct
     aux 1
 
   let get_bit div reminder inp inp_rev len : bool =
-    if reminder = len then Int.shift_left (div land ~-div) 1 land div <> 0
+    if reminder = len then ((div land ~-div) lsl 1) land div <> 0
     else (if is_odd div then inp else inp_rev).(reminder)
 
   let next (div, reminder) m =

@@ -4,7 +4,7 @@ let cnt () = Lib.read_file "16" "19" int_of_string |> List.hd
 
 module P1 = struct
   let main cnt =
-    let min = Int.shift_left 1 (Lib.two_power_floor cnt) in
+    let min = 1 lsl Lib.two_power_floor cnt in
     ((cnt - min) * 2) + 1
 end
 

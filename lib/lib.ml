@@ -123,8 +123,8 @@ end
 
 let is_odd n = n land 1 = 1
 let is_even n = not (is_odd n)
-let halve n = Int.shift_right n 1
-let double n = Int.shift_left n 1
+let halve n = n lsr 1
+let double n = n lsl 1
 
 let is_int s =
   try
@@ -248,4 +248,5 @@ let rec permutations l =
     in
     aux 0
 
-let compare = compare
+let split_on_space l =
+  Re.Str.(split (regexp "[\t\r ]") l) |> List.filter (( <> ) "")
