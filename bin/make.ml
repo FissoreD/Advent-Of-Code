@@ -18,5 +18,5 @@ let () =
       "(* https://adventofcode.com/20%s/day/%d *)\n\n\
        let cnt () = (Lib.read_file \"%s\" \"%s\" (String.split_on_char ' '))\n"
       year (int_of_string day) year day;
-    Printf.fprintf out_src "let part1() = ()\n let part2() = ()";
+    Printf.fprintf out_src "let part1() = ()\nlet part2() = ()";
     close_out out_src)
