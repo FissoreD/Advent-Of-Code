@@ -21,21 +21,16 @@ module P2 = struct
   let build_map stop =
     let tbl = Hashtbl.create 256 in
     let neigh_value p =
-      List.map (Pos.move_from_dir_diag p) Pos.list_diag
+      Pos.neighbors ~dir_t:D8 p
       |> List.filter_map (Hashtbl.find_opt tbl)
       |> List.fold_left ( + ) 0
     in
-    let next_dir = function
-      | Pos.U -> Pos.L
-      | Pos.L -> Pos.D
-      | Pos.D -> Pos.R
-      | Pos.R -> Pos.U
-    in
-    let next_pos ({ x; y } as p : Pos.t) (dir : Pos.dir) =
+    let next_dir = function Pos.T.N -> Pos.T.W | W -> S | S -> E | _ -> N in
+    let next_pos ({ x; y } as p : Pos.t) dir =
       let is_next_dir (res : Pos.t) =
         res.x = -res.y || (res.x > 0 && x = y) || (res.x < 0 && res.x = res.y)
       in
-      let res = Pos.move_from_dir p dir in
+      let res = Pos.move_in_square p dir in
       (res, if is_next_dir res then next_dir dir else dir)
     in
     let rec add_next (p, dir) =
@@ -44,7 +39,7 @@ module P2 = struct
       if value > stop then value else add_next (next_pos p dir)
     in
     Hashtbl.add tbl Pos.zero 1;
-    add_next ({ x = 1; y = 0 }, Pos.U)
+    add_next ({ x = 1; y = 0 }, N)
 
   let main cnt = build_map cnt
 end
