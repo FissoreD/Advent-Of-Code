@@ -49,7 +49,7 @@ module P1 = struct
         calc_dist dist_mat 0 e
         + dist_from_start.(List.hd e)
         + if go_back then dist_from_start.(List.rev e |> List.hd) else 0)
-      (Lib.permutations (List.init (List.length goal_pos) Lib.id))
+      (Lib.permutations (List.init (List.length goal_pos) Fun.id))
     |> List.fold_left min max_int
 
   let main ?(go_back = false) cnt =

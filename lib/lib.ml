@@ -35,7 +35,7 @@ module List = struct
     in
     count 0
 
-  let get a b = List.nth b a
+  let get a b = (Fun.flip nth) a b
 
   let rec set index elt = function
     | [] -> []
@@ -182,7 +182,6 @@ let repeat_string n s =
 let string_start_padding str_len pad_char str =
   String.make (max 0 (str_len - String.length str)) pad_char ^ str
 
-let xor a b = (a && not b) || (b && not a)
 let bin_to_int s = "0b" ^ s |> int_of_string
 
 let int_to_bin = function
@@ -199,7 +198,6 @@ let rec gcd u v = if v <> 0 then gcd v (u mod v) else abs u
 let lcm m n =
   match (m, n) with 0, _ | _, 0 -> 0 | m, n -> abs (m * n) / gcd m n
 
-let id i = i
 let print_bool x = Printf.printf "%b" x
 let remove_comma = Re.Str.global_replace (Re.Str.regexp ",") ""
 let md5_to_hex s = Digest.string s |> Digest.to_hex

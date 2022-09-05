@@ -3,7 +3,7 @@
 type hist_cell = { key : string; i : int; hash : string; five_list : char list }
 type history = hist_cell Deque.t
 
-let cnt () = Lib.read_file "16" "14" Lib.id |> List.hd
+let cnt () = Lib.read_file "16" "14" Fun.id |> List.hd
 
 module P1 = struct
   let hash base i = Lib.md5_to_hex @@ Printf.sprintf "%s%d" base i

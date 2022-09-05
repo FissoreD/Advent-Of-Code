@@ -2,4 +2,4 @@
 
 (library
  (name y2017)
- (libraries lib re pos))
+ (libraries lib re pos union_find))

@@ -87,8 +87,7 @@ module P1 = struct
     in
     aux weapon_nb armor_nb ring_nb (ring_nb - 1)
 
-  let main ?(funct = min) ?(cmp = max_int) ?(should_win = (id : bool -> bool))
-      monster =
+  let main ?(funct = min) ?(cmp = max_int) ?(should_win = Fun.id) monster =
     let aux cost (weapon_ind, armor_ind, r1_ind, r2_ind) =
       let weapon = nth store.weapon weapon_ind in
       let armor = if armor_ind = -1 then empty else nth store.armor armor_ind in

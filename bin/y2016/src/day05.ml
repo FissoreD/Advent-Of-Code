@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/5 *)
 
-let cnt () = Lib.read_file "16" "05" Lib.id |> List.hd
+let cnt () = Lib.read_file "16" "05" Fun.id |> List.hd
 
 module P1 = struct
   let is_valid s = String.sub s 0 5 |> String.for_all (( = ) '0')

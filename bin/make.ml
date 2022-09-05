@@ -4,9 +4,12 @@ let file_exists filename =
     true
   with Unix.Unix_error _ -> false
 
+let string_start_padding str_len pad_char str =
+  String.make (max 0 (str_len - String.length str)) pad_char ^ str
+
 let () =
-  let year = Sys.argv.(1) |> Lib.string_start_padding 2 '0' in
-  let day = Sys.argv.(2) |> Lib.string_start_padding 2 '0' in
+  let year = Sys.argv.(1) |> string_start_padding 2 '0' in
+  let day = Sys.argv.(2) |> string_start_padding 2 '0' in
   let input = "bin/y20" ^ year ^ "/input/day" ^ day ^ ".txt" in
   let src = "bin/y20" ^ year ^ "/src/day" ^ day ^ ".ml" in
   (if file_exists input |> not then

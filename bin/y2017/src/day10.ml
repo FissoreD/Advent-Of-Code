@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2017/day/10 *)
 
-let cnt () = Lib.read_file "17" "10" Lib.id |> List.hd
+let cnt () = Lib.read_file "17" "10" Fun.id |> List.hd
 
 module P1 = struct
   let reverse_sub_arr arr len start =
@@ -14,7 +14,7 @@ module P1 = struct
     done
 
   let main ?(len = 256) (cnt : string) =
-    let arr = Array.init len Lib.id in
+    let arr = Array.init len Fun.id in
     let len = Array.length arr in
     let rec aux pos skip = function
       | [] -> arr.(0) * arr.(1)
@@ -31,7 +31,7 @@ module P2 = struct
     (Lib.string_2_char_list l |> List.map int_of_char) @ [ 17; 31; 73; 47; 23 ]
 
   let main ?(len = 256) (cnt : string) =
-    let arr = Array.init len Lib.id in
+    let arr = Array.init len Fun.id in
     let len = Array.length arr in
     let cnt' = to_ascii cnt in
     let rec aux (pos, skip) = function

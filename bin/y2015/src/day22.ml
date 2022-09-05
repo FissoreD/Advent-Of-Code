@@ -93,7 +93,7 @@ module P1 = struct
     |> map Option.some
 
   (* Hero penality is for part 2 *)
-  let main ?(hero_penality = id) monster =
+  let main ?(hero_penality = Fun.id) monster =
     let minim = ref max_int in
     let rec aux (hero, monster, spells) is_player history =
       let hero = if is_player then hero_penality hero else hero in

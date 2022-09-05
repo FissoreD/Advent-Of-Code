@@ -1,4 +1,11 @@
-(executables
- (public_names aoc make)
- (names main make)
- (libraries y2015 y2016 y2017 unix))
+(executable
+ (public_name aoc)
+ (name main)
+ (modules main)
+ (libraries y2015 y2016 y2017))
+
+(executable
+ (public_name make)
+ (name make)
+ (modules make)
+ (libraries unix))

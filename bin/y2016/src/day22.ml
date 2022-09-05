@@ -26,7 +26,7 @@ let cnt () =
       use_perc = i (m 6 l);
     }
   in
-  Lib.read_file "16" "22" Lib.id |> tl |> tl |> map parse_input
+  Lib.read_file "16" "22" Fun.id |> tl |> tl |> map parse_input
 
 module P1 = struct
   let is_empty { used; _ } = used = 0

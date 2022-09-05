@@ -2,7 +2,7 @@
 
 open Re.Str
 
-let cnt () = Lib.read_file "16" "09" Lib.id
+let cnt () = Lib.read_file "16" "09" Fun.id
 
 module P1 = struct
   let regex = regexp {|(\([0-9]*\)x\([0-9]*\))|}

@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/5 *)
 
-let cnt () = Lib.read_file "15" "05" Lib.id
+let cnt () = Lib.read_file "15" "05" Fun.id
 
 module P1 = struct
   let is_fine s =

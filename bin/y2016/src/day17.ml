@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2016/day/17 *)
 
-let cnt () = Lib.read_file "16" "17" Lib.id |> List.hd
+let cnt () = Lib.read_file "16" "17" Fun.id |> List.hd
 
 type position = { x : int; y : int }
 type dir = U | D | L | R
@@ -27,7 +27,7 @@ module P1 = struct
     let cat = prev_pc ^ next_pc in
     let x = Lib.md5_to_hex cat in
     List.mapi (fun pos e -> if is_open x.[pos] then Some e else None) pos_list
-    |> List.filter_map Lib.id
+    |> List.filter_map Fun.id
 
   let main cnt =
     let to_explore = Queue.create () in

@@ -7,7 +7,7 @@ module MySet = Set.Make (struct
 end)
 
 let cnt () =
-  let res = Lib.read_file "15" "19" Lib.id |> List.rev in
+  let res = Lib.read_file "15" "19" Fun.id |> List.rev in
   let str = List.hd res |> Lib.string_2_char_list in
   let map =
     List.tl res |> List.tl

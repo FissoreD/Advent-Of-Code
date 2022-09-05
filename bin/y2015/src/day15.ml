@@ -25,7 +25,7 @@ module P1 = struct
       else if height < max_height - 1 then
         Node
           ( value,
-            List.init (max_total - acc + 1) Lib.id
+            List.init (max_total - acc + 1) Fun.id
             |> List.map (fun e -> aux (height + 1) (acc + e) e) )
       else Node (value, [ Node (max_total - acc, [ End ]) ])
     in

@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2015/day/8 *)
 
-let cnt () = Lib.read_file "15" "08" Lib.id
+let cnt () = Lib.read_file "15" "08" Fun.id
 
 module P1 = struct
   let rec len_char_list acc = function

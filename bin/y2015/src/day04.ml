@@ -1,7 +1,7 @@
 (* https://adventofcode.com/2015/day/4 *)
 
 let cnt () =
-  match Lib.read_file "15" "04" Lib.id with
+  match Lib.read_file "15" "04" Fun.id with
   | [ a ] -> a
   | _ -> raise Lib.Invalid_input
 

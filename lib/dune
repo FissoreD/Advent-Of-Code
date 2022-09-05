@@ -12,3 +12,7 @@
 (library
  (name pos)
  (modules pos))
+
+(library
+ (name union_find)
+ (modules union_find))

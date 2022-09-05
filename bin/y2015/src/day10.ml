@@ -1,7 +1,7 @@
 (* https://adventofcode.com/2015/day/10 *)
 
 let cnt () =
-  Lib.read_file "15" "10" Lib.id
+  Lib.read_file "15" "10" Fun.id
   |> List.hd |> Lib.string_2_char_list
   |> List.map Lib.string_of_char
   |> List.map int_of_string
