@@ -56,7 +56,7 @@ end
 let x, y = (1000, 1000)
 
 let part1 () =
-  P1.main (Array.init x (fun _ -> Array.make y false)) (cnt ()) |> print_int
+  P1.main (Array.init x (fun _ -> Array.make y false)) (cnt ()) |> string_of_int
 
 let part2 () =
-  P2.main (Array.init x (fun _ -> Array.make y 0)) (cnt ()) |> print_int
+  P2.main (Array.init x (fun _ -> Array.make y 0)) (cnt ()) |> string_of_int

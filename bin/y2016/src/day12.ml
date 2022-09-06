@@ -39,6 +39,6 @@ let part1 ?(m = { a = 0; b = 0; c = 0; d = 0; i = 0 }) () =
   let computed_cnt = cnt () in
   let alt = length computed_cnt in
   let rec aux m = if m.i >= alt then m.a else aux ((nth computed_cnt m.i) m) in
-  aux m |> print_int
+  aux m |> string_of_int
 
 let part2 ?(m = { a = 0; b = 0; c = 1; d = 0; i = 0 }) = part1 ~m

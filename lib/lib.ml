@@ -248,3 +248,14 @@ let rec permutations l =
 
 let split_on_space l =
   Re.Str.(split (regexp "[\t\r ]") l) |> List.filter (( <> ) "")
+
+let find_all_ints_in_string l =
+  let open Re.Str in
+  let rec find_ints pos acc =
+    if acc = 5 then []
+    else
+      let next = search_forward (regexp {|-?[0-9]+|}) l pos in
+      let found = matched_group 0 l in
+      int_of_string found :: find_ints (next + String.length found) (acc + 1)
+  in
+  find_ints 0 0

@@ -29,5 +29,5 @@ module P2 = struct
         if a = 0 then min_int else if b = 0 then max_int else b - a)
 end
 
-let part1 () = P1.main (cnt ()) |> print_endline
-let part2 () = P2.main (cnt ()) |> print_endline
+let part1 () = P1.main (cnt ())
+let part2 () = P2.main (cnt ())

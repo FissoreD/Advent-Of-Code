@@ -28,7 +28,7 @@ module P2 = struct
     | (pos, dist) :: tl -> maxim_filter (dist, [ pos ]) tl
 
   let main cnt =
-    let arr = Array.init (List.length cnt) (fun _ -> ref 0) in
+    let arr = Array.init (List.length cnt) (Fun.const ref 0) in
     let rec aux = function
       | 0 -> ()
       | n ->
@@ -40,5 +40,5 @@ module P2 = struct
     Array.fold_left (fun acc value -> max acc !value) 0 arr
 end
 
-let part1 () = P1.main (cnt ()) |> print_int
-let part2 () = P2.main (cnt ()) |> print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

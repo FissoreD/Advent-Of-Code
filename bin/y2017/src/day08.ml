@@ -35,5 +35,5 @@ module P1 = struct
     fold (fun _ v acc -> max acc v) tbl 0
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P1.main ~r:false (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P1.main ~r:false (cnt ()) |> string_of_int

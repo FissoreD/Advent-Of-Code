@@ -57,5 +57,5 @@ module P2 = struct
   let main = P1.main ~next_pos ~pad ~pos:(ref { x = 0; y = 2 })
 end
 
-let part1 () = P1.main (cnt ()) |> print_endline
-let part2 () = P2.main (cnt ()) |> print_endline
+let part1 () = P1.main (cnt ())
+let part2 () = P2.main (cnt ())

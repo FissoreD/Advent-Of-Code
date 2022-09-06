@@ -37,5 +37,5 @@ module P2 = struct
     MySet.(union set1 set2 |> cardinal)
 end
 
-let part1 () = P1.makeMove (cnt ()) |> MySet.cardinal |> print_int
-let part2 () = P2.move_alternate (cnt ()) |> print_int
+let part1 () = P1.makeMove (cnt ()) |> MySet.cardinal |> string_of_int
+let part2 () = P2.move_alternate (cnt ()) |> string_of_int

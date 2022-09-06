@@ -47,5 +47,5 @@ module P2 = struct
     find_error max_int cnt
 end
 
-let part1 () = P1.main (cnt ()) |> print_endline
-let part2 () = P2.main (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ())
+let part2 () = P2.main (cnt ()) |> string_of_int

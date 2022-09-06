@@ -32,5 +32,5 @@ module P2 = struct
     aux cnt_parsed
 end
 
-let part1 () = P1.parse_line (cnt ()) |> print_int
-let part2 () = P2.remove_red (cnt ()) |> print_int
+let part1 () = P1.parse_line (cnt ()) |> string_of_int
+let part2 () = P2.remove_red (cnt ()) |> string_of_int

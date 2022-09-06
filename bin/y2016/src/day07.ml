@@ -49,5 +49,5 @@ module P2 = struct
   let main cnt = List.filter is_valid_line cnt |> List.length
 end
 
-let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
-let part2 () = P2.main (cnt ()) |> string_of_int |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

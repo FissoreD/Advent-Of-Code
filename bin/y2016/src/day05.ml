@@ -30,5 +30,5 @@ module P2 = struct
       main ~nmb:(nmb + 1) ~res ~found_len cnt
 end
 
-let part1 () = P1.main (cnt ()) |> print_endline
-let part2 () = P2.main (cnt ()) |> print_endline
+let part1 () = P1.main (cnt ())
+let part2 () = P2.main (cnt ())

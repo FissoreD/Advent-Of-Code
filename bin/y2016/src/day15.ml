@@ -41,5 +41,5 @@ module P2 = struct
   let main cnt = P1.main (new_cnt cnt)
 end
 
-let part1 () = P1.main (cnt ()) |> Printf.printf "%d\n"
-let part2 () = P2.main (cnt ()) |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

@@ -35,5 +35,5 @@ module P2 = struct
     |> List.fold_left ( + ) 0
 end
 
-let part1 () = cnt () |> P1.total_area_counter |> print_int
-let part2 () = cnt () |> P2.total_area_counter |> print_int
+let part1 () = cnt () |> P1.total_area_counter |> string_of_int
+let part2 () = cnt () |> P2.total_area_counter |> string_of_int

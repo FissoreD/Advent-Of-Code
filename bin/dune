@@ -1,7 +1,6 @@
-(executable
- (public_name aoc)
- (name main)
- (modules main)
+(executables
+ (public_names main test)
+ (modules main test)
  (libraries y2015 y2016 y2017))
 
 (executable

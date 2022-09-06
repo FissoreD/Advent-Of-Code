@@ -103,5 +103,5 @@ module P2 = struct
     P1.main ~m:{ a = 12; b = 0; c = 0; d = 0; i = 0 } (replace_with_mul cnt)
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P2.main (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

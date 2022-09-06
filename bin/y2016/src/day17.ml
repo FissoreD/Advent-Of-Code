@@ -67,5 +67,5 @@ module P2 = struct
     !longest_valid
 end
 
-let part1 () = P1.main (cnt ()) |> print_endline
-let part2 () = P2.main (cnt ()) |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ())
+let part2 () = P2.main (cnt ()) |> string_of_int

@@ -1,36 +1,27 @@
 (* https://adventofcode.com/2015/day/24 *)
 
-let cnt () =
-  Lib.read_file "15" "24" (fun e -> String.trim e |> int_of_string)
-  |> List.sort compare
+let cnt () = Lib.read_file "15" "24" int_of_string
 
-let rec sub_list tot group_weight = function
-  | [] -> []
-  | _ :: tl as l -> l :: sub_list tot group_weight tl
+module P1 = struct
+  let main parts cnt =
+    let obj = List.fold_left ( + ) 0 cnt / parts in
+    let res, groups = (ref max_int, ref max_int) in
+    let rec aux acc mul gr l =
+      if acc = obj then (
+        if gr < !groups then (
+          res := mul;
+          groups := gr)
+        else if gr = !groups then res := min mul !res)
+      else if acc < obj && gr < !groups then
+        match l with
+        | [] -> ()
+        | hd :: tl ->
+            aux (acc + hd) (mul * hd) (gr + 1) tl;
+            aux acc mul gr tl
+    in
+    aux 0 1 0 cnt;
+    !res
+end
 
-let smallest_product a b = List.fold_left ( * ) 1 a > List.fold_left ( * ) 1 b
-
-let update_acc_tot acc tot l =
-  if l = [] then (acc, tot, []) else List.(hd l :: acc, tot + hd l, tl l)
-
-let main cnt =
-  let group_weight = List.fold_left ( + ) 0 cnt in
-  let min_len, res = (ref max_int, ref [ max_int ]) in
-  let rec find_groups2 ?(acc = []) ?(tot = 0) l =
-    if not (l = [] || tot > group_weight || List.length acc > !min_len) then
-      List.iter
-        (fun l ->
-          let acc, tot, tl = update_acc_tot acc tot l in
-          if tot = group_weight && List.length acc <= !min_len then (
-            min_len := List.length acc;
-            if List.length !res = !min_len then (
-              if smallest_product !res acc then res := acc)
-            else res := acc);
-          find_groups2 ~acc ~tot tl)
-        (sub_list tot group_weight l)
-  in
-  find_groups2 cnt;
-  List.fold_left ( * ) 1 !res
-
-let part1 () = main (cnt ()) |> string_of_int |> print_endline
-let part2 () = main (cnt ()) |> string_of_int |> print_endline
+let part1 () = P1.main 3 (cnt ()) |> string_of_int
+let part2 () = P1.main 4 (cnt ()) |> string_of_int

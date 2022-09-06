@@ -39,5 +39,5 @@ module P1 = struct
     res |> Array.fold_left (fun acc e -> acc ^ if e then "1" else "0") ""
 end
 
-let part1 () = P1.main (cnt ()) |> print_endline
-let part2 () = P1.main ~len:35651584 (cnt ()) |> print_endline
+let part1 () = P1.main (cnt ())
+let part2 () = P1.main ~len:35651584 (cnt ())

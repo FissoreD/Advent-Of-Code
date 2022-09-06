@@ -34,8 +34,9 @@ module P1 = struct
     | [] -> [ 0 ]
 
   let print f =
-    f |> List.rev |> List.iter (fun f -> print_char (int_2_char f));
-    print_newline ()
+    f |> List.rev
+    |> List.map (fun f -> Lib.string_of_char (int_2_char f))
+    |> String.concat ""
 
   let rec find_next_word l =
     let x = next l in
@@ -46,12 +47,16 @@ module P1 = struct
     then x
     else find_next_word x
 
-  let main cnt = List.map char_2_int cnt |> List.rev |> find_next_word
+  let main cnt = List.map char_2_int cnt |> List.rev |> find_next_word |> print
 end
 
 module P2 = struct
-  let main x = P1.main x |> P1.find_next_word
+  open P1
+
+  let main x =
+    List.map char_2_int x |> List.rev |> find_next_word |> P1.find_next_word
+    |> print
 end
 
-let part1 () = P1.main (cnt ()) |> P1.print
-let part2 () = P2.main (cnt ()) |> P1.print
+let part1 () = P1.main (cnt ())
+let part2 () = P2.main (cnt ())

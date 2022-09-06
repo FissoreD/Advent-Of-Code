@@ -29,10 +29,10 @@ end
 
 let part1 () =
   match cnt () with
-  | [ cnt ] -> cnt |> P1.count_parenthesis |> print_int
+  | [ cnt ] -> cnt |> P1.count_parenthesis |> string_of_int
   | _ -> raise Lib.Invalid_input
 
 let part2 () =
   match cnt () with
-  | [ cnt ] -> cnt |> P2.count_first_down |> print_int
+  | [ cnt ] -> cnt |> P2.count_first_down |> string_of_int
   | _ -> raise Lib.Invalid_input

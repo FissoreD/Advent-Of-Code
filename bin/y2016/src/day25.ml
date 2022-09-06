@@ -88,27 +88,26 @@ module P1 = struct
   let main cnt =
     let len = Array.length cnt in
     let rec aux n =
-      print_string @@ Printf.sprintf "\n%d " n;
+      (* print_string @@ Printf.sprintf "\n%d " n; *)
       let rec aux1 stop wanted m =
         if stop = 1000 then failwith "END";
         if m.i >= len || m.i < 0 then m.a
         else
           let output, mem = row_to_instr cnt.(m.i) cnt m in
           if output = None then aux1 stop wanted mem
-          else (
-            print_int @@ Option.get output;
-            if output = Some wanted then
-              aux1 (stop + 1)
-                (if output = None then wanted else (wanted + 1) mod 2)
-                mem
-            else failwith "Stop")
+          else if (* print_int @@ Option.get output; *)
+                  output = Some wanted then
+            aux1 (stop + 1)
+              (if output = None then wanted else (wanted + 1) mod 2)
+              mem
+          else failwith "Stop"
       in
       try aux1 0 0 { a = n; b = 0; c = 0; d = 0; i = 0 }
       with Failure a -> if a = "END" then n else aux (n + 1)
     in
-    print_endline "";
+    (* print_endline ""; *)
     aux 0
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P1.main (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = "Nope"

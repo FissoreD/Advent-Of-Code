@@ -57,5 +57,5 @@ module P1 = struct
     find_shortest_path ~go_back cnt start goal_pos
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P1.main ~go_back:true (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P1.main ~go_back:true (cnt ()) |> string_of_int

@@ -1,6 +1,5 @@
 (* https://adventofcode.com/2016/day/11 *)
 open Re.Str
-open Printf
 
 type row = { gen : string list; chip : string list }
 type diagram_type = row list
@@ -142,5 +141,5 @@ module P2 = struct
   let main cnt = P1.main (build_new_cnt cnt)
 end
 
-let part1 () = P1.main (cnt ()) |> printf "%d\n"
-let part2 () = P2.main (cnt ()) |> printf "%d\n"
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

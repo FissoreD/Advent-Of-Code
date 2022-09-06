@@ -67,5 +67,7 @@ module P2 = struct
   let main str = count_maj str - count_Rn_Ar str - (2 * count_Y str) - 1
 end
 
-let part1 () = P1.main (cnt ()) |> print_int
-let part2 () = P2.main (cnt () |> fst |> Lib.char_list_2_string) |> print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+
+let part2 () =
+  P2.main (cnt () |> fst |> Lib.char_list_2_string) |> string_of_int

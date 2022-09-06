@@ -64,10 +64,5 @@ module P2 = struct
   let count_valid map cnt = List.filter (is_valid map) cnt
 end
 
-let part1 () =
-  P1.count_valid known_properties (cnt ())
-  |> List.iter (fun { name; _ } -> print_string name)
-
-let part2 () =
-  P2.count_valid known_properties (cnt ())
-  |> List.iter (fun { name; _ } -> print_string name)
+let part1 () = (P1.count_valid known_properties (cnt ()) |> List.hd).name
+let part2 () = (P2.count_valid known_properties (cnt ()) |> List.hd).name

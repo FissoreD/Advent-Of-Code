@@ -35,5 +35,5 @@ module P1 = struct
     aux 0 arr1 arr2 row_nb
 end
 
-let part1 () = P1.main (cnt ()) |> Printf.printf "%d\n"
-let part2 () = P1.main ~row_nb:400000 (cnt ()) |> Printf.printf "%d\n"
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P1.main ~row_nb:400000 (cnt ()) |> string_of_int

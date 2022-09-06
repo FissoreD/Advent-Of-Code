@@ -33,5 +33,5 @@ module P2 = struct
     List.filter (( = ) (List.hd l)) l |> List.length
 end
 
-let part1 () = P1.main (cnt ()) |> print_int
-let part2 () = P2.main (cnt ()) |> print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

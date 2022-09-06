@@ -39,5 +39,5 @@ module P2 = struct
     List.map (fun e -> aux 0 (String.length e) e) cnt |> List.fold_left ( + ) 0
 end
 
-let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
-let part2 () = P2.main (cnt ()) |> string_of_int |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

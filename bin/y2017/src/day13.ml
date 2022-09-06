@@ -32,5 +32,5 @@ module P2 = struct
     find_zero 0
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P2.main (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

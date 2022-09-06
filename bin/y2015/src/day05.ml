@@ -40,5 +40,5 @@ module P2 = struct
     List.map is_fine x |> List.map Lib.bool_to_int |> List.fold_left ( + ) 0
 end
 
-let part1 () = P1.is_fine_fold (cnt ()) |> print_int
-let part2 () = P2.is_fine_fold (cnt ()) |> print_int
+let part1 () = P1.is_fine_fold (cnt ()) |> string_of_int
+let part2 () = P2.is_fine_fold (cnt ()) |> string_of_int

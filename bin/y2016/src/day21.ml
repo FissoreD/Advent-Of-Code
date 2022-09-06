@@ -111,9 +111,11 @@ module P2 = struct
 end
 
 let part1 () =
-  P1.main "abcdefgh" (cnt ()) |> Array.iter print_char;
-  print_endline ""
+  P1.main "abcdefgh" (cnt ())
+  |> Array.map Lib.string_of_char
+  |> Array.to_list |> String.concat ""
 
 let part2 () =
-  P2.main "fbgdceah" (cnt ()) |> Array.iter print_char;
-  print_endline ""
+  P2.main "fbgdceah" (cnt ())
+  |> Array.map Lib.string_of_char
+  |> Array.to_list |> String.concat ""

@@ -53,5 +53,5 @@ module P2 = struct
     |> String.concat ""
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P2.main (cnt ()) |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ())

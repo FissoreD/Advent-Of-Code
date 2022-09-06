@@ -53,5 +53,5 @@ module P2 = struct
     (List.find (fun inp -> List.mem "northpole" (decrypt inp)) cnt).id
 end
 
-let part1 () = P1.main () |> string_of_int |> print_endline
-let part2 () = P2.main () |> string_of_int |> print_endline
+let part1 () = P1.main () |> string_of_int
+let part2 () = P2.main () |> string_of_int

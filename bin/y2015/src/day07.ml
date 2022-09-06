@@ -52,7 +52,7 @@ module P1 = struct
     aux MyMap.empty rules
 end
 
-let part1 () = P1.main (cnt ()) |> MyMap.find "a" |> print_int
+let part1 () = P1.main (cnt ()) |> MyMap.find "a" |> string_of_int
 
 let part2 () =
   let cnt = cnt () in
@@ -67,4 +67,4 @@ let part2 () =
     in
     aux [] cnt
   in
-  P1.main new_cnt |> MyMap.find "a" |> print_int
+  P1.main new_cnt |> MyMap.find "a" |> string_of_int

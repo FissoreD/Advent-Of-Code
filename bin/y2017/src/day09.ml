@@ -29,12 +29,11 @@ module P2 = struct
         let ind = search_forward (regexp "<[^>]*>") l pos in
         let matched = matched_group 0 l in
         let len = String.length matched in
-        print_endline matched;
         aux (acc + len - 2) (ind + len)
       with Not_found -> acc
     in
     aux 0 0
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P2.main (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

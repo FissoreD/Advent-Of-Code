@@ -64,5 +64,5 @@ module P2 = struct
     |> Array.fold_left (fun acc (a, b) -> acc + Lib.bool_to_int (a = b)) 0
 end
 
-let part1 () = P1.main (cnt ()) |> Lib.print_int
-let part2 () = P2.main (cnt ()) |> Lib.print_int
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

@@ -46,7 +46,7 @@ let part1 () =
   let rec aux (((_r1, r2), pos) as memory) =
     if pos >= stop then r2 else aux ((nth cnt_computed pos) memory)
   in
-  aux memory |> print_int
+  aux memory |> string_of_int
 
 let part2 () =
   let cnt_computed = cnt () in
@@ -54,4 +54,4 @@ let part2 () =
   let rec aux (((_r1, r2), pos) as memory) =
     if pos >= stop then r2 else aux ((nth cnt_computed pos) memory)
   in
-  aux memory |> print_int
+  aux memory |> string_of_int

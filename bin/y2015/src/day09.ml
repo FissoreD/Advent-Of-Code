@@ -91,5 +91,5 @@ module P2 = struct
   let main v = v |> P1.solve ( - ) |> ( * ) (-1)
 end
 
-let part1 () = P1.main (P1.makeMap (cnt ())) |> print_int
-let part2 () = P2.main (P1.makeMap (cnt ())) |> print_int
+let part1 () = P1.main (P1.makeMap (cnt ())) |> string_of_int
+let part2 () = P2.main (P1.makeMap (cnt ())) |> string_of_int

@@ -67,5 +67,5 @@ module P2 = struct
         main new_arr (n - 1)
 end
 
-let part1 () = P1.main (cnt ()) 100 |> print_int
-let part2 () = P2.main (cnt ()) 100 |> print_int
+let part1 () = P1.main (cnt ()) 100 |> string_of_int
+let part2 () = P2.main (cnt ()) 100 |> string_of_int

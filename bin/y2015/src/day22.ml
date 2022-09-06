@@ -132,5 +132,5 @@ module P2 = struct
     P1.main ~hero_penality:(fun h -> { h with hit = h.hit - 1 }) monster
 end
 
-let part1 () = P1.main monster |> print_int
-let part2 () = P2.main monster |> print_int
+let part1 () = P1.main monster |> string_of_int
+let part2 () = P2.main monster |> string_of_int

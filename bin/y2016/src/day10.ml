@@ -61,7 +61,7 @@ module P1 = struct
   let main ?(c1 = 17) ?(c2 = 61) cnt : int =
     let a, b = split_cnt cnt in
     let total_bot_number = find_total_bot_number a b in
-    let bots = build_bots (init total_bot_number (fun _ -> [||])) b in
+    let bots = build_bots (init total_bot_number (Fun.const [||])) b in
     let outputs = make total_bot_number 0 in
     let bots_with_two_micros = findi (fun e -> length e = 2) in
     let rec aux (cnt_bot : int) =
@@ -88,5 +88,5 @@ module P2 = struct
   let main = P1.main ~c1:(-1) ~c2:(-1)
 end
 
-let part1 () = P1.main (cnt ()) |> string_of_int |> print_endline
-let part2 () = P2.main (cnt ()) |> string_of_int |> print_endline
+let part1 () = P1.main (cnt ()) |> string_of_int
+let part2 () = P2.main (cnt ()) |> string_of_int

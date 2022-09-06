@@ -17,5 +17,5 @@ module P1 = struct
     aux (1, 1) start
 end
 
-let part1 () = P1.main 20151125 |> string_of_int |> print_endline
-let part2 () = ()
+let part1 () = P1.main 20151125 |> string_of_int
+let part2 () = "Nope"
