@@ -79,6 +79,8 @@ let expected =
       ("2604", "3941460");
       ("8204", "1089");
       ("600", "313");
+      ("padheomkgjfnblic", "bfcdeakhijmlgopn");
+      ("1311", "39170601");
     |];
   |]
 
