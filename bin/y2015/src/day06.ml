@@ -19,9 +19,9 @@ let cnt () = Lib.read_file "15" "06" parse_line
 
 module P1 = struct
   let treat_operation = function
-    | "on" -> fun _ -> true
-    | "off" -> fun _ -> false
-    | _ -> fun e -> not e
+    | "on" -> Fun.const true
+    | "off" -> Fun.const false
+    | _ -> not
 
   let modify_bool matrix ((f : string), (a, b), (c, d)) op =
     for x = a to c do

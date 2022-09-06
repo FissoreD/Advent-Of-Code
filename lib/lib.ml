@@ -251,8 +251,9 @@ let split_on_space l =
 
 let find_all_ints_in_string l =
   let open Re.Str in
+  let len = String.length l in
   let rec find_ints pos acc =
-    if acc = 5 then []
+    if pos >= len then []
     else
       let next = search_forward (regexp {|-?[0-9]+|}) l pos in
       let found = matched_group 0 l in
