@@ -255,8 +255,10 @@ let find_all_ints_in_string l =
   let rec find_ints pos acc =
     if pos >= len then []
     else
-      let next = search_forward (regexp {|-?[0-9]+|}) l pos in
-      let found = matched_group 0 l in
-      int_of_string found :: find_ints (next + String.length found) (acc + 1)
+      try
+        let next = search_forward (regexp {|-?[0-9]+|}) l pos in
+        let found = matched_group 0 l in
+        int_of_string found :: find_ints (next + String.length found) (acc + 1)
+      with Not_found -> []
   in
   find_ints 0 0
