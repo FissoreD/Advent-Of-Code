@@ -17,4 +17,5 @@ let switch nb = function
   | 16 -> Day16.(Lib.open_submodule part1 part2 nb) ()
   | 17 -> Day17.(Lib.open_submodule part1 part2 nb) ()
   | 18 -> Day18.(Lib.open_submodule part1 part2 nb) ()
+  | 19 -> Day19.(Lib.open_submodule part1 part2 nb) ()
   | _ -> raise Lib.Switch_not_implemented
