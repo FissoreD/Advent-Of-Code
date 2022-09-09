@@ -53,9 +53,9 @@ module List = struct
   let print f l = iter (fun elt -> f elt |> Printf.printf "%s ") l
 
   let transpose_matrix mat =
-    init
-      (hd mat |> length)
-      (fun i -> init (length mat) (fun j -> get j mat |> get i))
+    let height = hd mat |> length in
+    let width = length mat in
+    init height (fun i -> init width (fun j -> get j mat |> get i))
 
   let sub start len =
     let rec aux res start len = function
@@ -228,7 +228,7 @@ let open_submodule f1 f2 = function
   | 2 -> f2
   | _ -> invalid_arg "3rd param should be 1 or 2"
 
-let print_int = Printf.printf "%d\n"
+let print_int i = print_endline @@ Printf.sprintf "%d" i
 
 let rec permutations l =
   let n = List.length l in
