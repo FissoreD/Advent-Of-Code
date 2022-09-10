@@ -6,30 +6,30 @@ module P1 = struct
   type d = Pos.T.t
 
   let find tbl p = match Hashtbl.find_opt tbl p with None -> '.' | Some a -> a
-
-  let swap_cnt tbl p =
-    Hashtbl.replace tbl p (match find tbl p with '.' -> '#' | _ -> '.')
-
+  let replace tbl k v = Hashtbl.replace tbl k v
   let rotate_right : d -> d = function N -> E | E -> S | S -> W | _ -> N
   let rotate_left : d -> d = function N -> W | W -> S | S -> E | _ -> N
+  let node_change = function '.' -> '#' | _ -> '.'
 
-  let main ?(times = 10_000) cnt =
-    let (tbl : (Pos.t, char) Hashtbl.t) = Hashtbl.create (1 lsr 15) in
+  let rotation_rule = function
+    | '.' -> rotate_left
+    | '#' -> rotate_right
+    | 'w' -> Fun.id
+    | _ -> fun e -> rotate_left (rotate_left e)
+
+  let main ?(times = 10_000) ?(node_change = node_change) cnt =
+    let (tbl : (Pos.t, char) Hashtbl.t) = Hashtbl.create (1 lsl 22) in
     let w, h = List.(length (hd cnt), length cnt) in
-    List.iteri
-      (fun y e ->
-        List.iteri (fun x e -> if e = '#' then Hashtbl.add tbl { x; y } e) e)
-      cnt;
-    let rec aux dir pos burst acc =
-      if acc = times then burst
-      else
-        let old_cnt = find tbl pos in
-        let new_dir =
-          (if old_cnt = '#' then rotate_right else rotate_left) dir
-        in
-        let burst = burst + Lib.bool_to_int (old_cnt = '.') in
-        swap_cnt tbl pos;
-        aux new_dir (Pos.move_in_square pos new_dir) burst (acc + 1)
+    List.iteri (fun y e -> List.iteri (fun x e -> replace tbl { x; y } e) e) cnt;
+    let rec aux dir pos burst = function
+      | n when n = times -> burst
+      | n ->
+          let old_cnt = find tbl pos in
+          let dir = (rotation_rule old_cnt) dir in
+          let new_char = node_change old_cnt in
+          let burst = burst + Lib.bool_to_int (new_char = '#') in
+          replace tbl pos new_char;
+          aux dir (Pos.move_in_square pos dir) burst (n + 1)
     in
     aux N { x = w / 2; y = h / 2 } 0 0
 end
@@ -38,30 +38,7 @@ module P2 = struct
   include P1
 
   let node_change = function '.' -> 'w' | 'w' -> '#' | '#' -> 'f' | _ -> '.'
-
-  let rotation_rule = function
-    | '.' -> rotate_left
-    | 'w' -> Fun.id
-    | '#' -> rotate_right
-    | _ -> fun e -> rotate_left (rotate_left e)
-
-  let main ?(times = 10_000_000) cnt =
-    let (tbl : (Pos.t, char) Hashtbl.t) = Hashtbl.create (1 lsr 15) in
-    let w, h = List.(length (hd cnt), length cnt) in
-    List.iteri
-      (fun y e ->
-        List.iteri (fun x e -> if e = '#' then Hashtbl.add tbl { x; y } e) e)
-      cnt;
-    let rec aux dir pos burst acc =
-      if acc = times then burst
-      else
-        let old_cnt = find tbl pos in
-        let new_dir = (rotation_rule old_cnt) dir in
-        let burst = burst + Lib.bool_to_int (old_cnt = 'w') in
-        Hashtbl.replace tbl pos (node_change (find tbl pos));
-        aux new_dir (Pos.move_in_square pos new_dir) burst (acc + 1)
-    in
-    aux N { x = w / 2; y = h / 2 } 0 0
+  let main ?(times = 10_000_000) = main ~times ~node_change
 end
 
 let part1 () = P1.main (cnt ()) |> string_of_int
