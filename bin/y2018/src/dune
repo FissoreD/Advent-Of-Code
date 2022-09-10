@@ -1,0 +1,5 @@
+(include_subdirs unqualified)
+
+(library
+ (name y2018)
+ (libraries lib re pos))

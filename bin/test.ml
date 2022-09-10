@@ -90,6 +90,7 @@ let expected =
       ("1940", "1928");
       ("3362", "");
     |];
+    [| ("505", "72330") |];
   |]
 
 let raise_exception y d p res =

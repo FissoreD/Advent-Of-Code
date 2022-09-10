@@ -1,7 +1,7 @@
 (executables
  (public_names main test)
  (modules main test)
- (libraries y2015 y2016 y2017))
+ (libraries y2015 y2016 y2017 y2018))
 
 (executable
  (public_name make)
