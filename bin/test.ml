@@ -91,7 +91,10 @@ let expected =
       ("3362", "");
     |];
     [|
-      ("505", "72330"); ("7221", "mkcdflathzwsvjxrevymbdpoq"); ("101469", "1067");
+      ("505", "72330");
+      ("7221", "mkcdflathzwsvjxrevymbdpoq");
+      ("101469", "1067");
+      ("115167", "32070");
     |];
   |]
 
@@ -130,6 +133,7 @@ let () =
           | 15 -> Y2015.switch part day
           | 16 -> Y2016.switch part day
           | 17 -> Y2017.switch part day
+          | 18 -> Y2018.switch part day
           | _ -> raise Lib.Invalid_input
         in
         raise_exception year day part res;
