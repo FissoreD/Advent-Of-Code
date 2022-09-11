@@ -46,7 +46,9 @@ let dist_pythagoras a b =
   sqrt ((float (abs (a.x - b.x)) ** 2.) +. (float (abs (a.y - b.y)) ** 2.))
 
 let zero = { x = 0; y = 0 }
-let pos_sum a b = { x = a.x + b.x; y = a.y + b.y }
+let max_pos = { x = max_int; y = max_int }
+let add a b = { x = a.x + b.x; y = a.y + b.y }
+let sub a b = { x = a.x - b.x; y = a.y - b.y }
 let is_positive { x; y } = x >= 0 && y >= 0
 let is_valid (maxX, maxY) p = is_positive p && p.x < maxX && p.y < maxY
 let give_dir_list = function D4 -> list_d4 | D6 -> list_d6 | D8 -> list_d8
