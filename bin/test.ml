@@ -97,6 +97,7 @@ let expected =
       ("115167", "32070");
       ("9562", "4934");
       ("2906", "50530");
+      ("OCPUEFIXHRGWDZABTQJYMNKVSL", "991");
     |];
   |]
 

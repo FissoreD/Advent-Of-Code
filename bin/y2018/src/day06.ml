@@ -76,6 +76,5 @@ module P2 = struct
     !res
 end
 
-(* Not 4885 (too high) *)
 let part1 () = P1.main (cnt ()) |> string_of_int
 let part2 () = P2.main ~total:10_000 (cnt ()) |> string_of_int
