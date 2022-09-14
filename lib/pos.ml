@@ -58,7 +58,10 @@ let neighbors ?(dir_t = D4) pos =
 
 let positive_neighbors pos = neighbors pos |> List.filter is_positive
 let to_string { x; y } = Printf.sprintf "{x: %d; y=%d}" x y
-let print pos = print_string @@ to_string pos
+
+let print ?(br = false) pos =
+  print_string @@ to_string pos;
+  if br then print_endline ""
 
 (** returns the shortest path from a position [s] to a position [e], from a grid where [None] cells represents walls  *)
 let shortest_path_len ?(dir_t = D4) grid s e =
