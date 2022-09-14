@@ -10,7 +10,7 @@ let switch nb = function
   | 9 -> Day09.(Lib.open_submodule part1 part2 nb) ()
   | 10 -> Day10.(Lib.open_submodule part1 part2 nb) ()
   | 11 -> Day11.(Lib.open_submodule part1 part2 nb) ()
-  (* | 12 -> Day12.(Lib.open_submodule part1 part2 nb) () *)
+  | 12 -> Day12.(Lib.open_submodule part1 part2 nb) ()
   (* | 13 -> Day13.(Lib.open_submodule part1 part2 nb) () *)
   (* | 14 -> Day14.(Lib.open_submodule part1 part2 nb) () *)
   (* | 15 -> Day15.(Lib.open_submodule part1 part2 nb) () *)
