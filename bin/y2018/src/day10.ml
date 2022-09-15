@@ -46,7 +46,7 @@ module P1 = struct
               aux l (x + 1, y))
     in
     aux list (0, 0);
-    Buffer.to_bytes buf |> Bytes.to_string
+    Buffer.contents buf
 
   let main cnt =
     let rec repeat cnt ({ w; h; _ } as old_dim) time =
