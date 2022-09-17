@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2018/day/13 *)
 
-type car = { dir_cnt : int; dir : Pos.T.t; pos : Pos.t; id : int }
+type car = { dir_cnt : int; dir : Pos.Dir.dirs; pos : Pos.t; id : int }
 
 let cnt () =
   Lib.read_file "18" "13" (fun e -> Lib.string_2_char_list e |> Array.of_list)
@@ -37,7 +37,7 @@ module P1 = struct
 
   let next_dir_inters { dir_cnt; dir; pos; id } =
     let dir_cnt = dir_cnt mod 3 in
-    let left = Pos.T.(function N -> W | W -> S | S -> E | _ -> N) in
+    let left = Pos.Dir.(function N -> W | W -> S | S -> E | _ -> N) in
     let dir =
       [| left; Fun.id; (fun e -> left (left (left e))) |].(dir_cnt) dir
     in

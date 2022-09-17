@@ -10,9 +10,7 @@ module P1 = struct
   module S = Set.Make (String)
 
   let find tbl k = Option.value ~default:[] (find_opt tbl k)
-
-  let set2sort s1 s2 =
-    S.diff s1 s2 |> S.to_seq |> List.of_seq |> List.sort compare
+  let set2sort s1 s2 = S.diff s1 s2 |> S.elements
 
   let make_tbl cnt =
     let pointer, pointed = (ref S.empty, ref S.empty) in

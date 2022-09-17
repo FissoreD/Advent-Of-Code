@@ -25,7 +25,7 @@ module P2 = struct
       |> List.filter_map (Hashtbl.find_opt tbl)
       |> List.fold_left ( + ) 0
     in
-    let next_dir = function Pos.T.N -> Pos.T.W | W -> S | S -> E | _ -> N in
+    let next_dir = Pos.Dir.(function N -> W | W -> S | S -> E | _ -> N) in
     let next_pos ({ x; y } as p : Pos.t) dir =
       let is_next_dir (res : Pos.t) =
         res.x = -res.y || (res.x > 0 && x = y) || (res.x < 0 && res.x = res.y)

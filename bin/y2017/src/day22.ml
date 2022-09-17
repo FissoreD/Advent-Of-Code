@@ -3,7 +3,7 @@
 let cnt () = Lib.read_file "17" "22" Lib.string_2_char_list
 
 module P1 = struct
-  type d = Pos.T.t
+  type d = Pos.Dir.dirs
 
   let find tbl p = match Hashtbl.find_opt tbl p with None -> '.' | Some a -> a
   let replace tbl k v = Hashtbl.replace tbl k v
