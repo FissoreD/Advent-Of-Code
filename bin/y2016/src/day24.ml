@@ -2,18 +2,17 @@
 
 let cnt () =
   Lib.read_file "16" "24" (fun e ->
-      Array.init (String.length e) (fun pos ->
-          if e.[pos] = '#' then None else Some e.[pos]))
+      Array.init (String.length e) (fun pos -> e.[pos]))
   |> Array.of_list
 
 module P1 = struct
-  let get_goal_pos_list (s : char option array array) =
+  let get_goal_pos_list (s : char array array) =
     let res : Pos.t list ref = ref [] in
     let start = ref Pos.zero in
     for y = 0 to Array.length s - 1 do
       for x = 0 to Array.length s.(0) - 1 do
-        if s.(y).(x) <> None then
-          let content = Option.get s.(y).(x) in
+        if s.(y).(x) <> '#' then
+          let content = s.(y).(x) in
           if content = '0' then start := { x; y }
           else if content <> '.' then res := { x; y } :: !res
       done

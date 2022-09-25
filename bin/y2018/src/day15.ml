@@ -1,6 +1,6 @@
 (* https://adventofcode.com/2018/day/15 *)
 type stats = { attack : int; mutable hit : int; is_elf : bool }
-type map = { units : (Pos.t, stats) Hashtbl.t; tbl : char option array array }
+type map = { units : (Pos.t, stats) Hashtbl.t; tbl : char array array }
 
 let cnt ?(elf_attack = 3) () =
   let open Hashtbl in
@@ -19,7 +19,7 @@ let cnt ?(elf_attack = 3) () =
            | 'E' -> add units pos true
            | 'G' -> add units pos false
            | _ -> ());
-           if ch = '.' then Some '.' else None)
+           if ch = '.' then '.' else '#')
   in
   let tbl =
     Lib.read_file "18" "15" Fun.id |> Array.of_list |> Array.map parse_line
@@ -39,29 +39,9 @@ module P1 = struct
   let ordered_list tbl =
     List.sort (fun (a, _) (b, _) -> Pos.compare a b) (to_seq tbl |> List.of_seq)
 
-  let print { tbl; units } =
-    for y = 0 to Array.length tbl - 1 do
-      for x = 0 to Array.length tbl.(0) - 1 do
-        (if tbl.(y).(x) <> None then '.'
-        else
-          match find_opt units { x; y } with
-          | None -> '#'
-          | Some { is_elf; _ } when is_elf -> 'E'
-          | _ -> 'G')
-        |> print_char
-      done;
-      print_endline ""
-    done;
-    List.iter
-      (fun (k, v) ->
-        Pos.print k;
-        Printf.printf " %d %b\n" v.hit v.is_elf)
-      (ordered_list units);
-    print_endline ""
-
   let diff_unit_type u1 u2 = u1.is_elf <> u2.is_elf
 
-  let attack_neigh tbl units stats new_pos =
+  let attack_neigh (tbl : char array array) units stats new_pos =
     let goal_pos, goal =
       List.filter_map
         (fun e ->
@@ -79,16 +59,16 @@ module P1 = struct
       goal.hit <- goal.hit - stats.attack;
       if goal.hit <= 0 then (
         remove units goal_pos;
-        tbl.(goal_pos.y).(goal_pos.x) <- Some '.');
+        tbl.(goal_pos.y).(goal_pos.x) <- '.');
       true)
 
   let move { tbl; units } (unit_pos, stats) =
     if stats.hit > 0 && not (attack_neigh tbl units stats unit_pos) then (
       Hashtbl.iter
         (fun (k : Pos.t) v ->
-          if diff_unit_type v stats then tbl.(k.y).(k.x) <- Some '.')
+          if diff_unit_type v stats then tbl.(k.y).(k.x) <- '.')
         units;
-      tbl.(unit_pos.y).(unit_pos.x) <- Some '.';
+      tbl.(unit_pos.y).(unit_pos.x) <- '.';
       let obj_pos_list, dist =
         Pos.find_nearest tbl unit_pos
           (ordered_list units
@@ -97,10 +77,10 @@ module P1 = struct
       in
       match dist with
       | -1 ->
-          tbl.(unit_pos.y).(unit_pos.x) <- None;
+          tbl.(unit_pos.y).(unit_pos.x) <- '#';
           Hashtbl.iter
             (fun (k : Pos.t) v ->
-              if diff_unit_type v stats then tbl.(k.y).(k.x) <- None)
+              if diff_unit_type v stats then tbl.(k.y).(k.x) <- '#')
             units
       | _ ->
           let obj_pos = List.sort Pos.compare obj_pos_list |> List.hd in
@@ -116,9 +96,9 @@ module P1 = struct
           replace units new_pos stats;
           Hashtbl.iter
             (fun (k : Pos.t) v ->
-              if diff_unit_type v stats then tbl.(k.y).(k.x) <- None)
+              if diff_unit_type v stats then tbl.(k.y).(k.x) <- '#')
             units;
-          tbl.(new_pos.y).(new_pos.x) <- None;
+          tbl.(new_pos.y).(new_pos.x) <- '#';
           attack_neigh tbl units stats new_pos |> ignore)
 
   let main cnt =

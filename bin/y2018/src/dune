@@ -3,3 +3,8 @@
 (library
  (name y2018)
  (libraries lib re pos))
+
+(menhir
+ (modules day20_parser))
+
+(ocamllex day20_lexer)

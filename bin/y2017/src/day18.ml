@@ -78,10 +78,6 @@ module P2 = struct
     ( { tbl = tbl 0; stdout = q0; stdin = q1; i; sent_value; name = 0 },
       { tbl = tbl 1; stdout = q1; stdin = q0; i; sent_value; name = 1 } )
 
-  let print ({ tbl; _ } as p) i =
-    Hashtbl.iter (fun k v -> Printf.printf "(%s, %d)" k v) tbl;
-    Printf.printf "(instr : %d := %s)\n" p.i (String.concat " " i.(p.i))
-
   let rec run_until_block cnt p acc =
     if interpr_instr p cnt.(p.i) then run_until_block cnt p true else acc
 

@@ -33,7 +33,7 @@ module P1 = struct
     | _ :: tl -> 0 :: next tl
     | [] -> [ 0 ]
 
-  let print f =
+  let to_string f =
     f |> List.rev
     |> List.map (fun f -> Lib.string_of_char (int_2_char f))
     |> String.concat ""
@@ -47,7 +47,8 @@ module P1 = struct
     then x
     else find_next_word x
 
-  let main cnt = List.map char_2_int cnt |> List.rev |> find_next_word |> print
+  let main cnt =
+    List.map char_2_int cnt |> List.rev |> find_next_word |> to_string
 end
 
 module P2 = struct
@@ -55,7 +56,7 @@ module P2 = struct
 
   let main x =
     List.map char_2_int x |> List.rev |> find_next_word |> P1.find_next_word
-    |> print
+    |> to_string
 end
 
 let part1 () = P1.main (cnt ())

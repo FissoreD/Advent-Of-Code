@@ -4,7 +4,7 @@ type row = { pos : Pos.t; size : int; used : int; avail : int; use_perc : int }
 type grid_info = {
   h : int;
   w : int;
-  arr : string option array;
+  arr : char array array;
   mutable current_pos : Pos.t;
   mutable content_pos : Pos.t;
 }
@@ -76,25 +76,13 @@ module P2 = struct
       Array.init (w * h) (fun i ->
           let pos = int_to_pos i w in
           let content = (get_value w arr pos).used in
-          if content <= (get_value w arr start_pos).size then Some "." else None)
+          if content <= (get_value w arr start_pos).size then '.' else '#')
+      |> Lib.Array.to_matrix w
     in
     { w; h; current_pos = start_pos; arr; content_pos = { x = w - 1; y = 0 } }
 
-  let print { w; arr; current_pos; content_pos; _ } =
-    Array.iteri
-      (fun pos e ->
-        (match e with
-        | None -> "#"
-        | Some e ->
-            if pos mod w = 0 then print_newline ();
-            if int_to_pos pos w = current_pos then "_"
-            else if int_to_pos pos w = content_pos then "G"
-            else e)
-        |> print_string)
-      arr
-
-  let shortest_path { w; arr; current_pos; content_pos; _ } =
-    Pos.shortest_path_len (Lib.Array.to_matrix w arr) current_pos content_pos
+  let shortest_path { arr; current_pos; content_pos; _ } =
+    Pos.shortest_path_len arr current_pos content_pos
 
   let main cnt =
     let maze = build_matrix cnt in

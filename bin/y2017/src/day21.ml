@@ -10,13 +10,6 @@ let cnt () =
       | _ -> invalid_arg "Y17-D21 Invalid Input")
 
 module P1 = struct
-  let print_mat arr =
-    Array.iter
-      (fun e ->
-        Array.iter print_char e;
-        print_newline ())
-      !arr
-
   let all_combo_of_row (tbl : (char array array, char array array) Hashtbl.t)
       (key, value) =
     let to_matrix_array l = l |> List.map Array.of_list |> Array.of_list in

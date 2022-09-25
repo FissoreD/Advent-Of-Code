@@ -7,9 +7,7 @@ let cnt () =
        | [] -> raise Lib.Invalid_input
        | [ l; w; h ] ->
            (l |> int_of_string, w |> int_of_string, h |> int_of_string)
-       | f :: _ ->
-           print_endline ("Here" ^ f);
-           raise Lib.Invalid_input)
+       | _ -> raise Lib.Invalid_input)
 
 module P1 = struct
   let total_area_counter cnt =

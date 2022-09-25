@@ -8,7 +8,6 @@ type dir = U | D | L | R
 module P1 = struct
   let pos_list = [ U; D; L; R ]
   let pos_to_str = function U -> "U" | D -> "D" | L -> "L" | R -> "R"
-  let print_pos { x; y } = print_endline @@ Printf.sprintf "%d %d" x y
 
   let move { x; y } = function
     | U -> { x; y = y - 1 }

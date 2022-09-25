@@ -20,7 +20,7 @@ module P1 = struct
     let w, h = (max_x - min_x + 1, max_y - min_y + 1) in
     { w; h; min_x; min_y }
 
-  let print cnt dim =
+  let to_string cnt dim =
     let list =
       List.sort
         (fun ((p1 : Pos.t), _) ((p2 : Pos.t), _) ->
@@ -52,7 +52,7 @@ module P1 = struct
     let rec repeat cnt ({ w; h; _ } as old_dim) time =
       let next = List.map (fun (p, v) -> (Pos.add p v, v)) cnt in
       let dim = calc_size next in
-      if dim.w > w || dim.h > h then (print cnt old_dim, time)
+      if dim.w > w || dim.h > h then (to_string cnt old_dim, time)
       else repeat next dim (time + 1)
     in
     repeat cnt { w = max_int; h = max_int; min_x = 0; min_y = 0 } 0

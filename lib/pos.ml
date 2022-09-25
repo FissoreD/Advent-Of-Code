@@ -66,7 +66,8 @@ let print ?br pos =
   print_string @@ to_string pos;
   if br <> None then print_endline ""
 
-let find_nearest ?(dir_t = D4) grid (s : t) (e : t list) : t list * int =
+let find_nearest ?(dir_t = D4) ?(walls = [ '#' ]) grid (s : t) (e : t list) :
+    t list * int =
   let module Set = Set.Make (T) in
   let w, h = (Array.length grid.(0), Array.length grid) in
   let explored = Hashtbl.create (w * h) in
@@ -74,7 +75,7 @@ let find_nearest ?(dir_t = D4) grid (s : t) (e : t list) : t list * int =
   let is_valid pos =
     (not @@ Hashtbl.mem explored pos)
     && is_valid (w, h) pos
-    && grid.(pos.y).(pos.x) <> None
+    && List.mem grid.(pos.y).(pos.x) walls |> not
   in
   let rec aux pos_l dist =
     match Set.inter e pos_l with
@@ -95,7 +96,7 @@ let find_nearest ?(dir_t = D4) grid (s : t) (e : t list) : t list * int =
   in
   aux (Set.singleton s) 0
 
-(** returns the shortest path from a position [s] to a position [e], from a grid where [None] cells represents walls  *)
+(** returns the shortest path from a position [s] to a position [e], from a grid where '#' cells represents walls  *)
 let shortest_path_len ?(dir_t = D4) grid s e =
   snd (find_nearest ~dir_t grid s [ e ])
 
